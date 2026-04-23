@@ -12,7 +12,7 @@ const config: Config = {
   },
 
   url: 'https://kitsunecommand.kitsuneden.net',
-  baseUrl: '/',
+  baseUrl: '/docs/',
 
   organizationName: 'Kitsune-Den',
   projectName: 'KitsuneCommandDocs',
@@ -30,6 +30,7 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
+          routeBasePath: '/',
           editUrl:
             'https://github.com/Kitsune-Den/KitsuneCommandDocs/tree/main/',
         },
@@ -87,11 +88,11 @@ const config: Config = {
           items: [
             {
               label: 'Introduction',
-              to: '/docs/',
+              to: '/intro',
             },
             {
               label: 'Installation',
-              to: '/docs/getting-started/installation',
+              to: '/getting-started/installation',
             },
           ],
         },
