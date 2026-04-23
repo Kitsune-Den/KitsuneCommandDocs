@@ -4,20 +4,25 @@ sidebar_position: 1
 
 # Web Panel
 
-The web panel is a Vue 3 single-page app served from the mod's `wwwroot/` directory. It talks to the backend over HTTP (JSON) and WebSockets (real-time events).
+The web panel is a Vue 3 single-page app served from the mod's `wwwroot/` directory. It talks to the backend over HTTP (JSON) and WebSockets (real-time events) and defaults to **port 8890**.
 
-This section walks through each major area of the panel from a server-admin's point of view. For the underlying HTTP surface, see [REST API Reference](../api-reference/index.mdx).
+This section walks through each major area from an admin's point of view. For the underlying HTTP surface, see [REST API Reference](../api-reference/index.mdx).
 
 ## Sections
 
-- **Dashboard & Monitoring** — Dashboard, Map, Console
-- **Players & Chat** — Players, Chat, Tickets, Colored Chat
-- **Economy** — Points, Store, CD Keys, VIP Gifts, Purchase History
-- **Teleportation** — Homes, Cities, History
-- **Game Events** — Blood Moon Vote, Task Scheduler
-- **Content** — Item Database
-- **Server Management** — Server Control, Config Editor, Mods, Backups, Updates
+- [**Dashboard & Monitoring**](./dashboard-monitoring/dashboard.mdx) — Dashboard, Map, Console
+- [**Players & Chat**](./players-chat/players.mdx) — Players, Chat, Tickets
+- [**Economy**](./economy/points.mdx) — Points, Store, Purchase History, CD Keys, VIP Gifts
+- [**Teleportation**](./teleportation/cities.mdx) — Cities, Homes, History
+- [**Game Events**](./game-events/blood-moon.mdx) — Blood Moon Vote, Task Scheduler
+- [**Content**](./content/item-database.mdx) — Item Database
+- [**Server Management**](./server-management/server-control.mdx) — Control, Updates, Config Editor, Mods, Backups
+- [**Settings**](./settings.mdx) — Account, Users, per-feature configuration
 
-:::info In progress
-Individual pages for each area are being written. For now, the panel's UI labels line up with the backend controllers documented under [REST API Reference](../api-reference/index.mdx).
-:::
+## Real-time and polling
+
+A few screens are wired to WebSockets (`Console`, the Dashboard's Blood Moon progress). Most others poll the backend on a timer when they're in view. Both are called out on each page.
+
+## Permissions
+
+Actions that modify server state (kick, ban, give items, run commands, restore backups) are gated by role. A read-only account can browse everything but buttons that would write are hidden or disabled.

@@ -1,0 +1,35 @@
+---
+sidebar_position: 2
+---
+
+# Server Updates
+
+Steam-powered server auto-update settings.
+
+## Form fields
+
+| Field | Notes |
+|-------|-------|
+| Auto-Update | Master toggle |
+| Branch | `public`, `beta`, etc. |
+| Branch Password | For private betas |
+| Log Retention | Days to keep update logs |
+| Steam App ID | Defaults to the 7D2D dedicated server app ID |
+| Steam Username | Steam account used by SteamCMD |
+| Config Backup | XML blob (copy of `serverconfig.xml`) kept as a safety net |
+
+## Steam auth
+
+Configuring Steam credentials opens an auth modal asking for the account password and a 2FA Steam Guard code. Credentials are stored encrypted for SteamCMD to use.
+
+## Actions
+
+- **Save settings** — persists the form.
+- **Authorize Steam** — opens the auth modal.
+- **Edit config backup** — textarea; lets you restore from a known-good `serverconfig.xml` if the live one ever gets corrupted.
+
+## Notes
+
+- An update triggers on server restart if Auto-Update is on and SteamCMD detects a newer build on the selected branch.
+- Use `beta` to pin to experimental builds, or a named branch with password for private test channels.
+- Config backups don't auto-rotate. Remember to refresh the snapshot when you change `serverconfig.xml` for real.

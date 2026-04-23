@@ -1,0 +1,8 @@
+{
+  "label": "Server Management",
+  "position": 7,
+  "link": {
+    "type": "generated-index",
+    "description": "Self-hoster tools: control, updates, config editor, mods, backups."
+  }
+}

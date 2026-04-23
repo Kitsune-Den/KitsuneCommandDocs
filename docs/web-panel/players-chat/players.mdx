@@ -1,0 +1,46 @@
+---
+sidebar_position: 1
+---
+
+# Players
+
+Browse online and offline players and drill into a single player's profile.
+
+## The list view
+
+Switch between **card grid** and **table** with the view toggle.
+
+**Card grid** shows avatar, health bar, and quick stats for each player. Good for at-a-glance monitoring.
+
+**Table view** columns:
+
+| Column | Notes |
+|--------|-------|
+| Player Name | Click to open detail |
+| Level | |
+| Health / Stamina | |
+| Position | World coordinates |
+| Kills | |
+| Deaths | |
+| Score | |
+
+Filter by **online/offline**, search by name, and sort by any column.
+
+## Actions (per player)
+
+- **Open detail** — full profile (see below).
+- **Edit metadata** — display name, notes, internal tags.
+- **Send private message** — delivered in-game.
+- **Give items** — prompts for item and quantity; requires the player to be online.
+- **Kick / Ban** — permission-gated; requires a confirmation dialog.
+
+## Player detail
+
+Clicking a player opens a single-page profile with:
+
+- **Stats cards** — level, health, stamina, position, kills, deaths, score.
+- **Belt items** — slot, icon, item name, quantity, quality.
+- **Backpack** — same columns as belt, shown in a separate table.
+- **Skills and perks** — skill name, current level, max level, locked (yes/no).
+
+Player detail is a **snapshot**. It refreshes when you reopen the page; it doesn't update live.

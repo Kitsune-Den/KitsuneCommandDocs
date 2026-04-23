@@ -1,0 +1,8 @@
+{
+  "label": "Players & Chat",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "Player list and detail views, chat history, and the support ticket queue."
+  }
+}

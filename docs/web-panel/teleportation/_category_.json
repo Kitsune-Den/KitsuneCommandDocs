@@ -1,0 +1,8 @@
+{
+  "label": "Teleportation",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "description": "Teleport waypoints, player homes, and the teleport audit log."
+  }
+}

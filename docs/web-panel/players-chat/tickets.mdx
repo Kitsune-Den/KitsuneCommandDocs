@@ -1,0 +1,45 @@
+---
+sidebar_position: 3
+---
+
+# Tickets
+
+A support queue for player-submitted tickets, with a two-panel triage layout.
+
+## Layout
+
+Left panel is the **ticket list**. Right panel is the **detail view** for the selected ticket.
+
+**Ticket list columns:**
+
+| Column | Notes |
+|--------|-------|
+| Ticket ID | |
+| Status | Tag (open / in-progress / closed / reopened) |
+| Subject | |
+| Player Name | |
+| Last Update | |
+
+**Detail panel:**
+
+- **Priority** tag
+- **Assignee**
+- **Status change buttons** — In Progress, Close, Reopen
+- **Message thread** — admin replies and player messages, tagged by sender type
+- **Reply box** at the bottom
+
+## Actions
+
+- **Mark in-progress.** Moves the ticket to the admin's plate without resolving it.
+- **Close.** Marks the ticket resolved.
+- **Reopen.** Brings a closed ticket back into the queue.
+- **Reply.** Type in the reply box and hit **Ctrl+Enter** to send.
+
+## Real-time
+
+No WebSocket here. The list refreshes when you change status or post a reply.
+
+## Notes
+
+- Sender tags in the thread make it obvious whether a message came from an admin or the player — useful when you're triaging at speed.
+- Ctrl+Enter sends the reply; plain Enter inserts a newline.

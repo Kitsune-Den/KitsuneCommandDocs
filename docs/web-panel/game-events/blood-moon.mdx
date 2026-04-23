@@ -1,0 +1,26 @@
+---
+sidebar_position: 1
+---
+
+# Blood Moon Vote
+
+Let players vote on the difficulty of the next Blood Moon night.
+
+## Where it lives
+
+Blood Moon Vote isn't a dedicated panel screen. It's split across three places:
+
+- **Configuration**: [Settings → Blood Moon Vote](../settings.mdx) — turn voting on, choose the voting window, and list the difficulty options players can pick from.
+- **Monitoring**: the [Dashboard](../dashboard-monitoring/dashboard.mdx) shows a live progress bar while a vote is open, along with the current tallies.
+- **Override**: the Dashboard has a **Force skip vote** button for admins. It ends the current vote immediately.
+
+## How it works (player side)
+
+- Before a Blood Moon night, if voting is enabled, players get a prompt in-game to pick a difficulty.
+- Their votes feed the tally shown on the Dashboard.
+- When the voting window closes (or an admin force-skips), the winning difficulty is applied to that night's horde.
+
+## Notes
+
+- A tie goes to whichever option was configured as the default in Settings.
+- Force-skipping doesn't just end the vote — it also applies the current leading option. If nobody has voted yet, the default kicks in.

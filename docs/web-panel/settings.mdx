@@ -1,0 +1,47 @@
+---
+sidebar_position: 8
+---
+
+# Settings
+
+The panel's admin settings screen. A tabbed interface that covers account management, user administration, and per-feature configuration.
+
+## Tabs
+
+| Tab | What it does |
+|-----|--------------|
+| Account | Change your own password |
+| Users | Create, edit, and delete panel users; reset user passwords |
+| Chat Commands | Enable/disable and configure per-command behavior |
+| Points | Sign-in rewards, accrual rules |
+| Teleport | Home limits, cooldowns, pricing |
+| Store | Global store settings |
+| Blood Moon Vote | Enable voting, set voting window and difficulty options |
+| Tickets | Ticket routing, priority defaults |
+| Discord | Discord bot settings (see [Configuration → Discord](../configuration/discord.mdx)) |
+
+## Account tab
+
+- **Change password** form with current, new, and confirm-new fields.
+- Password is hashed with BCrypt; the plaintext is never persisted.
+
+## Users tab
+
+Users table with columns:
+
+| Column | Notes |
+|--------|-------|
+| Username | Login handle |
+| Display Name | Friendly name |
+| Role | Tag (admin / moderator / viewer) |
+
+Actions: **Create user**, **Edit user**, **Delete user**, **Reset password**.
+
+## Feature tabs
+
+Each feature tab is a form of toggles, numbers, and dropdowns specific to that feature. Changes are saved per-tab — saving one tab doesn't touch another.
+
+## Notes
+
+- Role gating applies across the whole panel. A **viewer** can open Settings but only their own Account tab is editable.
+- Discord is covered in depth under [Configuration → Discord](../configuration/discord.mdx).

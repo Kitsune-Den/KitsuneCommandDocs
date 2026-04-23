@@ -1,0 +1,48 @@
+---
+sidebar_position: 2
+---
+
+# Store
+
+The in-game shop. Runs in two modes: **Browse** (what a player sees) and **Manage** (what an admin configures).
+
+## Browse mode
+
+A card grid of purchasable items. Clicking **Buy** opens a dialog listing the items and commands included in that store entry plus the price in points.
+
+## Manage mode
+
+Three tables:
+
+### Store items (what players buy)
+
+| Column | Notes |
+|--------|-------|
+| Name | |
+| Price | Points cost |
+| Description | |
+
+### Item definitions (reusable item packages)
+
+| Column | Notes |
+|--------|-------|
+| Name | |
+| Quality | |
+| Max Stack | |
+
+### Command definitions (reusable command packages)
+
+| Column | Notes |
+|--------|-------|
+| Command Name | |
+| Description | |
+
+## Actions
+
+- **Create / Edit / Delete** any row in the three tables above.
+- **Buy** (browse mode) — consumes the player's points and triggers delivery of the bundled items and commands.
+
+## Notes
+
+- Store items are composed by referencing **item definitions** and **command definitions**, so you define reusable pieces once and mix them into multiple store entries.
+- Item search inside the Create/Edit dialogs uses autocomplete with item icons from the [Item Database](../content/item-database.mdx).

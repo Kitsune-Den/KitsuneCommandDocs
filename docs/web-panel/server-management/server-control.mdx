@@ -1,0 +1,35 @@
+---
+sidebar_position: 1
+---
+
+# Server Control
+
+Save, restart, and shutdown actions, plus live resource stats.
+
+## What you see
+
+Stat cards:
+
+| Stat | Notes |
+|------|-------|
+| Players | Online / max |
+| FPS | |
+| Uptime | Formatted `h:m:s` |
+| Memory | GB or MB depending on amount |
+| Game Day / Time | |
+| Status | "Running" while healthy |
+
+## Actions
+
+- **Save World.** Triggers a world save on the dedicated server.
+- **Restart.** Confirmation dialog. Ends the current process and relaunches (assumes a process manager is supervising the server, e.g. systemd or a Windows service).
+- **Shutdown.** Prompts for a **delay in seconds** before the shutdown fires, and for an optional broadcast message. Lets players evacuate.
+
+## Real-time
+
+Stats auto-refresh every **10 seconds**.
+
+## Notes
+
+- The restart and shutdown actions hand control to your platform's process supervisor. If nothing is supervising the server, Shutdown will stop it and it will stay stopped.
+- For a *graceful* shutdown with an in-game countdown, use Shutdown with a delay rather than Restart.

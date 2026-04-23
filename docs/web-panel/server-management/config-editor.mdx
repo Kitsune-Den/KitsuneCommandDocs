@@ -1,0 +1,28 @@
+---
+sidebar_position: 3
+---
+
+# Config Editor
+
+Edit `serverconfig.xml` without SSH'ing into the server.
+
+## Two tabs
+
+### Form
+
+Fields grouped into **10 categories** (core, world, player, gameplay, etc.). Inputs are typed: toggles for booleans, number spinners for numeric fields, selects for enums. A few gameplay fields get specialized widgets — the day/night cycle field, for instance, shows a visual day-length picker.
+
+### Raw XML
+
+Full text editor with the current `serverconfig.xml`. Use this when you want surgical control or when a field isn't exposed in the Form tab yet.
+
+## Actions
+
+- **Save** — persists changes to `serverconfig.xml` on disk. Only changed fields are written, so if you only touched one toggle, the rest of the file stays byte-identical.
+- **Compare** — shows a diff against the original file so you can see exactly what's about to change.
+
+## Notes
+
+- `serverconfig.xml` is loaded by the dedicated server on startup. Changes take effect on the next restart.
+- The filename the editor reads and writes is set by `ServerSettingsFileName` in [appsettings.json](../../configuration/appsettings.mdx).
+- If you edit the XML manually on disk while the panel is open, hit refresh before editing in the panel to avoid clobbering your external changes.

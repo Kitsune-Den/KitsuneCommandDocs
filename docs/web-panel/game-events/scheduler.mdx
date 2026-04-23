@@ -1,0 +1,31 @@
+---
+sidebar_position: 2
+---
+
+# Task Scheduler
+
+Recurring automated commands that run on a fixed interval.
+
+## What you see
+
+| Column | Notes |
+|--------|-------|
+| Task Name | |
+| Interval | Human-readable (e.g. "every 15 min") |
+| Status | Enabled / Disabled tag |
+| Last Run | |
+| Next Run | |
+| Description | |
+
+## Actions
+
+- **Create / Edit** a schedule. Fields: name, command, interval (with preset buttons from 1 min up to 24 hr), description, enabled.
+- **Run now** — fires the command immediately and opens a **Results** dialog with the output.
+- **Toggle enable/disable** — pauses a schedule without deleting it.
+- **Delete** — removes the schedule.
+
+## Notes
+
+- The interval picker has preset buttons for common cadences. You can also type a custom interval.
+- Disabled schedules are kept in the list (greyed out) so you can turn them back on later; they don't contribute to Last/Next Run updates.
+- The Results dialog after a manual run is handy for testing a command before you set it on a schedule.

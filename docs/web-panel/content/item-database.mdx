@@ -1,0 +1,25 @@
+---
+sidebar_position: 1
+---
+
+# Item Database
+
+Read-only reference of every item the game knows about. Used when configuring store items, CD keys, VIP gifts, and admin give-item actions.
+
+## What you see
+
+| Column | Notes |
+|--------|-------|
+| Icon | |
+| Display Name | Localized; internal name shown secondary |
+| Quality | Yes / No tag |
+| Max Stack | |
+| Groups | Badge list |
+
+Search by display name or internal name. Filter by group.
+
+## Notes
+
+- This is purely a reference table. No editing, no CRUD.
+- The total item count is shown above the table. Expect a few thousand rows on a vanilla server; more with mods that register items.
+- The internal item name (shown secondary) is what you reference from commands and store definitions.

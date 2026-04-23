@@ -1,0 +1,30 @@
+---
+sidebar_position: 3
+---
+
+# Console
+
+A browser-based server console with live log streaming and command execution.
+
+## What you see
+
+- **Command input** at the top (or bottom, depending on build).
+- **Log output** with entries color-coded by level (error, warning, info).
+- **Connection status** indicator showing the live WebSocket state.
+- **Auto-scroll** toggle.
+
+## Actions
+
+- **Run a command.** Type a server command and hit Enter. Output streams into the log.
+- **Arrow keys** scroll through command history.
+- **Toggle auto-scroll** to pause the log when you want to read something without it jumping away.
+
+## Real-time
+
+The console is connected to the server over **WebSocket (port 8889)**. Logs stream live, not on a poll.
+
+## Notes
+
+- The log buffer is capped at **2000 lines**; on overflow the oldest 500 are dropped (keeping the most recent 1500).
+- If the connection status shows disconnected, commands won't run. Check that port 8889 is reachable from the browser's network.
+- Commands use the same syntax as the in-game console. KitsuneCommand adds a few `kc-` commands on top: `kc-gi` (give items), `kc-gm` (global message), `kc-pm` (private message), `kc-rs` (restart server). Type `help` to see the full list.

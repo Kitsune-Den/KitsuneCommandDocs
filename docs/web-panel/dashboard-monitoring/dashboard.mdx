@@ -1,0 +1,31 @@
+---
+sidebar_position: 1
+---
+
+# Dashboard
+
+The landing page after login. It's the server's health overview at a glance.
+
+## What you see
+
+| Section | Shows |
+|---------|-------|
+| Server Status | Players online, FPS, uptime, entities, memory |
+| Server Info | World name, difficulty, game version |
+| Activity Feed | Recent server events |
+| Economy Summary | Quick points/store numbers |
+| Blood Moon Vote | Live progress bar while voting is active |
+
+## Actions
+
+- **Force skip blood moon vote.** When a vote is active, admins get a button to end it early. Only visible while voting is open.
+- Most cards have a link/button that takes you to the full page for that area (Players, Economy, etc.).
+
+## Real-time
+
+Stats refresh every **5 seconds** by polling. The Blood Moon progress bar updates on the same interval.
+
+## Notes
+
+- Memory flips between GB and MB automatically depending on the value.
+- The "Force skip" button disappears once the vote closes; it doesn't stay visible as a disabled button.

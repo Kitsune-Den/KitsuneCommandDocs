@@ -1,0 +1,8 @@
+{
+  "label": "Game Events",
+  "position": 5,
+  "link": {
+    "type": "generated-index",
+    "description": "Blood Moon voting and the recurring task scheduler."
+  }
+}

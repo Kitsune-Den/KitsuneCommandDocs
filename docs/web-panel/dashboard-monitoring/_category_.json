@@ -1,0 +1,8 @@
+{
+  "label": "Dashboard & Monitoring",
+  "position": 1,
+  "link": {
+    "type": "generated-index",
+    "description": "The Dashboard, Map, and Console — the three screens you'll have open the most."
+  }
+}

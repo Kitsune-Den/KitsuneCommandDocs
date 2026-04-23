@@ -1,0 +1,37 @@
+---
+sidebar_position: 4
+---
+
+# Mods
+
+Manage the dedicated server's `Mods/` folder from the browser.
+
+## Two tabs
+
+### Installed
+
+| Column | Notes |
+|--------|-------|
+| Mod Name | |
+| Author | |
+| Version | |
+| Size | Formatted |
+| Enabled | Tag when disabled |
+| Protected | Tag on KitsuneCommand itself |
+
+### Discover
+
+Browse mods that aren't currently installed (wires into a discovery service; the exact set depends on your environment).
+
+## Actions
+
+- **Upload a mod** — ZIP file, max **200 MB**. The ZIP is expanded into `Mods/<ModName>/` on save.
+- **Toggle enable/disable** — renames the mod folder so the game skips it on load; toggle back on to re-enable.
+- **Delete** — removes the mod folder. Confirmation required.
+- **Search** — filters across name, author, and description.
+
+## Notes
+
+- KitsuneCommand itself shows a **Protected** tag — you can't disable or delete it from here (it wouldn't have anything to run on after).
+- A **Restart required** banner appears after any install/toggle/delete. The game only discovers mod changes on startup.
+- Upload size cap (200 MB) is generous enough for most mods. If you're hitting it, your mod is probably shipping something that shouldn't be in the ZIP.

@@ -1,0 +1,38 @@
+---
+sidebar_position: 5
+---
+
+# Backups
+
+Automated and manual world-save backups.
+
+## Schedule settings
+
+| Field | Notes |
+|-------|-------|
+| Enabled | Master toggle |
+| Interval | Minutes between automatic backups |
+| Max Backups | Older backups prune past this count |
+| Backup Path | Directory where archives are written |
+
+## Backup list
+
+| Column | Notes |
+|--------|-------|
+| Filename | |
+| World Name | |
+| Size | Formatted |
+| Created | |
+| Type | Manual / Scheduled / Restore point |
+
+## Actions
+
+- **Create Now** — takes an immediate backup regardless of schedule.
+- **Restore** — rolls the world back to the selected backup. Confirmation required.
+- **Delete** — removes a backup file. Confirmation required.
+
+## Notes
+
+- Restoring takes a snapshot of the current world first (logged as a **Restore point** in the Type column) so a bad restore is itself recoverable.
+- Max-backups pruning runs after a successful Create or a successful scheduled run; manually created restore points don't count against the limit.
+- The backup path needs to be writable by the account running the dedicated server. If backups are silently failing, check server logs and disk permissions.

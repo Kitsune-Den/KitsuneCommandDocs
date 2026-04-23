@@ -1,0 +1,27 @@
+---
+sidebar_position: 2
+---
+
+# Map
+
+A live view of the world with player positions on a zoomable tile map.
+
+## What you see
+
+- **World tiles** rendered server-side by SkiaSharp and served to a Leaflet frontend.
+- **Player markers** with name and avatar, positioned at each player's current location.
+- A coordinate readout when you click the map, shown in 7D2D game-space coordinates.
+
+## Actions
+
+- **Click a marker** to see that player's game coordinates.
+- **Pan and zoom** with mouse or touch gestures like any Leaflet map.
+
+## Real-time
+
+Player marker positions refresh every **5 seconds**.
+
+## Notes
+
+- The map uses Leaflet's `CRS.Simple` with a custom grid, not standard lat/long. Coordinates you see are in the 7D2D world's native format.
+- The first load of a region can take a few seconds while SkiaSharp renders tiles on demand. Subsequent loads are fast because tiles are cached.
