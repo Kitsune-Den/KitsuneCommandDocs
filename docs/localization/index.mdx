@@ -1,0 +1,28 @@
+---
+sidebar_position: 1
+---
+
+# Localization
+
+The web panel ships with five locales out of the box.
+
+| Locale | Language | File |
+|--------|----------|------|
+| `en` | English | `frontend/src/i18n/locales/en.ts` |
+| `ja` | Japanese | `frontend/src/i18n/locales/ja.ts` |
+| `ko` | Korean | `frontend/src/i18n/locales/ko.ts` |
+| `zh-CN` | Chinese (Simplified) | `frontend/src/i18n/locales/zh-CN.ts` |
+| `zh-TW` | Chinese (Traditional) | `frontend/src/i18n/locales/zh-TW.ts` |
+
+Users switch language from the panel's header; the selection is persisted per account.
+
+## Contributing a translation
+
+1. Copy `en.ts` to a new file at `frontend/src/i18n/locales/<locale>.ts`.
+2. Translate the strings in place, keeping the keys identical.
+3. Register the new locale in the i18n setup (see `frontend/src/i18n/index.ts`).
+4. Open a PR against [Kitsune-Den/KitsuneCommand](https://github.com/Kitsune-Den/KitsuneCommand).
+
+:::tip Keep interpolation placeholders intact
+Don't translate text inside `{...}` placeholders — those are variable names the runtime substitutes at render time. Translate the surrounding copy, leave the brace contents alone.
+:::

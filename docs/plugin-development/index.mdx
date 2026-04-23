@@ -1,0 +1,51 @@
+---
+sidebar_position: 1
+---
+
+# Plugin Development
+
+KitsuneCommand supports third-party plugins as compiled DLLs dropped into the mod's `Plugins/` folder. Plugins can subscribe to game events, register commands, and call into the mod's services.
+
+## Minimal plugin
+
+Reference `KitsuneCommand.Abstractions.dll` and implement `IPlugin`:
+
+```csharp
+using KitsuneCommand.Abstractions;
+
+public class MyPlugin : IPlugin
+{
+    public string Name    => "MyPlugin";
+    public string Version => "1.0.0";
+    public string Author  => "You";
+
+    public void Initialize(PluginContext context)
+    {
+        context.EventBus.Subscribe<ChatMessageEvent>(msg =>
+        {
+            // React to chat messages
+        });
+    }
+
+    public void Shutdown() { }
+}
+```
+
+## Targeting
+
+- **Framework:** .NET Framework 4.8 (same as the main mod)
+- **References:** `KitsuneCommand.Abstractions.dll`, plus whatever you need from the .NET BCL
+
+## Installation
+
+Drop the compiled DLL into:
+
+```
+<server>/Mods/KitsuneCommand/Plugins/<YourPlugin>.dll
+```
+
+Restart the server. Plugins are discovered on startup; there's no hot-reload.
+
+:::info In progress
+Full reference for `PluginContext`, the event bus, and the service surface is being written.
+:::

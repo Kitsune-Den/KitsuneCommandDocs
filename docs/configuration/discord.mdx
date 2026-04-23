@@ -1,0 +1,51 @@
+---
+sidebar_position: 2
+---
+
+# Discord Integration
+
+KitsuneCommand ships with a first-party Discord bot for chat bridging, event notifications, and slash commands. All settings live in the web panel under **Settings → Discord** and are persisted to the database.
+
+## What it does
+
+- **Chat bridge.** Mirrors in-game chat into a Discord channel and (optionally) Discord messages back into the game.
+- **Event notifications.** Posts to a Discord channel when a player joins or leaves, when the server starts or stops, and when Blood Moon begins.
+- **Slash commands.** Exposes a set of `/` commands in Discord for quick server actions.
+- **Status.** Shows the current player count in the bot's Discord status.
+
+## Settings
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `Enabled` | `false` | Master switch. Leave off until the rest is configured. |
+| `BotToken` | — | Discord bot token (from the [Discord developer portal](https://discord.com/developers/applications)). |
+| `ChatBridgeEnabled` | `true` | Bridge in-game chat to and from Discord. |
+| `ChatBridgeChannelId` | — | Channel ID that carries the chat bridge. |
+| `EventNotificationsEnabled` | `true` | Enable the event-notification firehose. |
+| `EventChannelId` | — | Channel ID that receives event notifications. |
+| `NotifyPlayerJoin` | `true` | Post when a player connects. |
+| `NotifyPlayerLeave` | `true` | Post when a player disconnects. |
+| `NotifyServerStart` | `true` | Post when the server finishes starting up. |
+| `NotifyServerStop` | `true` | Post when the server shuts down. |
+| `NotifyBloodMoon` | `true` | Post when a Blood Moon night begins. |
+| `SlashCommandsEnabled` | `true` | Register slash commands with Discord on startup. |
+| `ServerName` | `7 Days to Die Server` | Display name used in bot embeds and status. |
+| `ShowPlayerCountInStatus` | `true` | Update the bot's status with the current player count. |
+
+## Setting up the bot
+
+1. Create an application in the [Discord developer portal](https://discord.com/developers/applications) and add a Bot user.
+2. Under **OAuth2 → URL Generator**, select `bot` and `applications.commands`, grant the bot `Send Messages`, `Read Message History`, and `Use Slash Commands` in the target channels.
+3. Copy the bot token into **Settings → Discord → Bot Token**.
+4. Copy the **Channel ID** (right-click the channel in Discord with developer mode on → Copy Channel ID) for your chat bridge and your events channel.
+5. Toggle **Enabled** on and save. The bot should come online in your server within a few seconds.
+
+:::caution Keep the token private
+The bot token grants full control of the bot account. Don't paste it into chat or commit it to a repo — the web panel stores it encrypted in the database.
+:::
+
+## Troubleshooting
+
+- **Bot comes online but doesn't speak.** Check channel permissions; the bot needs `Send Messages` in the configured channels.
+- **Slash commands don't appear.** Discord caches command registration for up to an hour. Restart the server once, and if they still don't show, flip `SlashCommandsEnabled` off and on to re-register.
+- **Chat bridge one-way only.** Make sure `ChatBridgeEnabled` is on and that the bot has `Read Message History` in the bridge channel.

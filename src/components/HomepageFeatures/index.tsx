@@ -11,32 +11,35 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Easy to Use',
+    title: 'Monitoring',
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        Real-time dashboards for server stats, FPS, memory, and game time.
+        A Leaflet map with live player markers and region tracking. A web
+        console with log streaming and command history.
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
+    title: 'Management',
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        Players, chat, economy, teleports, scheduling, mods, backups, and a
+        rich <code>serverconfig.xml</code> editor. Plus a plugin system so
+        you can extend it with your own DLLs.
       </>
     ),
   },
   {
-    title: 'Powered by React',
+    title: 'Map',
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        SkiaSharp-rendered tiles served to a Leaflet frontend. Player
+        positions stream over WebSockets so the map updates live as people
+        move around your world.
       </>
     ),
   },

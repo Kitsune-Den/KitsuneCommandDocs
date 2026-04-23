@@ -1,0 +1,45 @@
+---
+sidebar_position: 3
+---
+
+# First Run
+
+Once you're logged in with the auto-generated admin credentials, there are a few things worth doing before you hand the panel out to other admins.
+
+## 1. Change the admin password
+
+Open **Settings → Account** (or equivalent in your build) and change the password. The default is random, but once it's been seen once it's been seen; rotate it.
+
+Passwords are stored hashed with BCrypt. The plaintext is never kept anywhere.
+
+## 2. Create additional admin / moderator accounts
+
+Rather than sharing the `admin` account, create a user per person:
+
+1. Go to **Settings → Users** (or the Users panel in your build).
+2. Add an account with a role that matches their needs (admin, moderator, read-only).
+3. Share the credentials privately.
+
+## 3. Verify the dashboard is live
+
+The dashboard should show real numbers: player count, FPS, memory, and a ticking game day/time. If any of those are stuck at zero or blank, check the server console for errors — usually it's a permissions issue on `<SaveGameDir>/KitsuneCommand/`.
+
+## 4. Open the map
+
+Navigate to the **Map** page. The first time it loads, SkiaSharp renders region tiles on demand, so the initial load can take a few seconds. After that, tiles are cached and map loads are fast.
+
+## 5. Try the console
+
+Open the **Console** page and run a harmless command like:
+
+```
+version
+```
+
+You should see the server respond in real time. If the console hangs, double-check that port 8889 (WebSocket) is reachable.
+
+## Next steps
+
+- Wire up Discord: see [Configuration → Discord](../configuration/discord.mdx).
+- Set up the store and points economy from the **Economy** section of the panel.
+- Review [Configuration → appsettings.json](../configuration/appsettings.mdx) if you need to change ports or token lifetimes.

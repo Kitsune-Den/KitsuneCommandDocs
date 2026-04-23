@@ -1,0 +1,52 @@
+---
+sidebar_position: 1
+---
+
+# appsettings.json
+
+KitsuneCommand's server-side config lives at `<SaveGameDir>/KitsuneCommand/appsettings.json`. It's a small JSON file that's generated on first launch if missing.
+
+## Default file
+
+```json
+{
+  "WebUrl": "http://*:8888",
+  "WebSocketPort": 8889,
+  "DatabasePath": "KitsuneCommand.db",
+  "AccessTokenExpireMinutes": 1440,
+  "RefreshTokenExpireDays": 7,
+  "ServerSettingsFileName": "serverconfig.xml",
+  "EnableCors": false,
+  "CorsOrigins": "http://localhost:5173"
+}
+```
+
+## Settings
+
+| Key | Default | Description |
+|-----|---------|-------------|
+| `WebUrl` | `http://*:8888` | Internal API bind address. Don't change this unless you're also moving the proxy. Access the panel on port **8890**, not 8888. |
+| `WebPanelPort` | `8890` | Frontend/login port. This is the URL you open in your browser. |
+| `WebSocketPort` | `8889` | WebSocket server port for real-time events (console log stream, map updates, chat). |
+| `DatabasePath` | `KitsuneCommand.db` | SQLite database file path, relative to `<SaveGameDir>/KitsuneCommand/`. |
+| `AccessTokenExpireMinutes` | `1440` | Access token lifetime in minutes (default 24 hours). |
+| `RefreshTokenExpireDays` | `7` | Refresh token lifetime in days. |
+| `ServerSettingsFileName` | `serverconfig.xml` | Name of the `serverconfig.xml` file that the Config Editor reads and writes. |
+| `EnableCors` | `false` | Turn on for frontend dev (Vite on `localhost:5173`). Leave off in production. |
+| `CorsOrigins` | `http://localhost:5173` | Allowed origin when `EnableCors` is `true`. |
+
+## Security notes
+
+- Tokens are signed server-side. Rotate the secret (regenerated on first run) by deleting `KitsuneCommand.db` — but be aware this also wipes users, points, and purchase history, so only do it on a fresh install.
+- `EnableCors: true` should only be used for local development. It widens the API surface to cross-origin callers.
+- The web panel port (8890) should be firewalled if the server is on the public internet and you only want authorized admins reaching it. Put it behind a VPN or a reverse proxy with HTTP auth for extra defense in depth.
+
+## Applying changes
+
+Most settings in `appsettings.json` are read on startup. After editing:
+
+1. Stop the dedicated server.
+2. Save the file.
+3. Restart the server.
+
+Changes to ports or CORS definitely require a restart. Token lifetime changes apply to *new* tokens issued after the restart; existing tokens continue using their original lifetime.

@@ -1,0 +1,8 @@
+{
+  "label": "Web Panel",
+  "position": 4,
+  "link": {
+    "type": "doc",
+    "id": "web-panel/index"
+  }
+}

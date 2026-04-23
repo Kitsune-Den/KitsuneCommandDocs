@@ -1,47 +1,40 @@
 ---
 sidebar_position: 1
+slug: /
 ---
 
-# Tutorial Intro
+# Introduction
 
-Let's discover **Docusaurus in less than 5 minutes**.
+**KitsuneCommand** is an open-source mod for 7 Days to Die dedicated servers that provides a RESTful API and a modern web management panel. It runs on both Windows and Linux, and is a clean-room V2 rewrite of [ServerKit](https://github.com/IceCoffee1024/7DaysToDie-ServerKit) with a Vue 3 frontend and improved security.
 
-## Getting Started
+Three pillars:
 
-Get started by **creating a new site**.
+- **Monitoring.** Live dashboards, GPS map with player tracking, web console with log streaming.
+- **Management.** Player tools, chat bridge, economy, teleports, scheduler, mods, backups, config editor.
+- **Map.** Leaflet-based world map rendered in SkiaSharp, updated in real time over WebSockets.
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+## What's in the box
 
-### What you'll need
+| Area | Highlights |
+|------|-----------|
+| Dashboard & Monitoring | Real-time stats (FPS, memory, day/time), Leaflet map, web console with history |
+| Players & Chat | Player list with inventory/skills, kick/ban, chat history, colored names |
+| Economy | Points, configurable store, CD keys, VIP gifts (daily/weekly/monthly), purchase history |
+| Game Systems | Teleports (home/city/friend), Blood Moon voting, task scheduler, item database |
+| Server Admin | Server control, `serverconfig.xml` editor, mod manager, auto-backups, plugin system |
+| Localization | English, Japanese, Korean, Chinese Simplified, Chinese Traditional |
 
-- [Node.js](https://nodejs.org/en/download/) version 20.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+## Tech stack
 
-## Generate a new site
+- **Backend:** C# 11 on .NET Framework 4.8, OWIN + ASP.NET Web API 2, Autofac DI, SQLite via Dapper
+- **Frontend:** Vue 3, TypeScript 5, Vite 6, PrimeVue 4
+- **Real-time:** WebSocketSharp
+- **Auth:** OAuth2 with BCrypt
+- **Map tiles:** SkiaSharp + Leaflet
+- **Game integration:** Harmony runtime patching
 
-Generate a new Docusaurus site using the **classic template**.
+## Where to go next
 
-The classic template will automatically be added to your project after you run the command:
-
-```bash
-npm init docusaurus@latest my-website classic
-```
-
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
-
-The command also installs all necessary dependencies you need to run Docusaurus.
-
-## Start your site
-
-Run the development server:
-
-```bash
-cd my-website
-npm run start
-```
-
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
-
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
-
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+- New to KitsuneCommand? Start with [Requirements](./getting-started/requirements.mdx) and [Installation](./getting-started/installation.mdx).
+- Already running it? Jump to [Configuration](./configuration/appsettings.mdx).
+- Building on top of it? See [Plugin Development](./plugin-development/index.mdx).

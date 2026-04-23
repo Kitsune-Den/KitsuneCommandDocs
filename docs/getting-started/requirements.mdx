@@ -1,0 +1,32 @@
+---
+sidebar_position: 1
+---
+
+# Requirements
+
+## Server
+
+- **7 Days to Die Dedicated Server**, version **V2.5 or newer**
+- **EAC**: Easy Anti-Cheat must be **off** on the server (KitsuneCommand is a Harmony mod)
+- **Open ports**: `8889` (WebSocket) and `8890` (web panel) reachable from wherever you want to access the panel
+
+## Platform
+
+| Platform | Runtime | Notes |
+|----------|---------|-------|
+| Windows | .NET Framework 4.8 | Included with Windows |
+| Linux | Mono | Included with the 7D2D dedicated server package |
+
+On Linux you also need `libsqlite3-0`, which is pre-installed on most modern distros. The same release ZIP works on both platforms; the mod auto-detects the platform at runtime and loads the correct native libraries.
+
+## Building from source
+
+If you plan to build instead of using a release:
+
+- [.NET SDK 8.0 or newer](https://dotnet.microsoft.com/download)
+- [Node.js 18 or newer](https://nodejs.org/)
+- The six game DLLs from your 7D2D install's `7DaysToDie_Data/Managed/` folder (see [Contributing](../contributing/index.mdx))
+
+## Browser
+
+Any modern browser (Chrome, Firefox, Safari, Edge). No IE11 support.

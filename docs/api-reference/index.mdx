@@ -1,0 +1,51 @@
+---
+sidebar_position: 1
+---
+
+# REST API Reference
+
+KitsuneCommand exposes a JSON REST API on port **8888** (internal; proxied through port 8890 with the included frontend). Endpoints are grouped by controller.
+
+## Authentication
+
+All non-auth endpoints require a bearer token obtained from `POST /api/auth/login`. See **Auth** below for details.
+
+## Controller groups
+
+| Group | Controllers |
+|-------|------------|
+| Auth | `AuthController` |
+| Dashboard | `DashboardController` |
+| Players | `PlayersController`, `PlayerMetadataController` |
+| Chat | `ChatController`, `ChatCommandSettingsController` |
+| Tickets | `TicketsController` |
+| Economy — Points | `PointsController`, `PointsSettingsController` |
+| Economy — Store | `StoreController`, `StoreSettingsController` |
+| Economy — CD Keys | `CdKeyController` |
+| Economy — VIP | `VipGiftController` |
+| Teleport | `TeleportController`, `TeleportSettingsController` |
+| Events | `BloodMoonVoteController`, `TaskScheduleController` |
+| Content | `GameItemController` |
+| Server — Control | `ServerController`, `ServerUpdateController` |
+| Server — Config | `ConfigController` |
+| Server — Mods | `ModsController`, `ModDiscoveryController` |
+| Server — Backups | `BackupsController` |
+| Integrations | `DiscordSettingsController` |
+
+:::info In progress
+Per-endpoint tables (method, path, request body, response shape) are being authored. In the meantime, all controllers follow the same conventions: `Route("api/<group>")`, bearer auth, envelope response `{ success, data, message }`.
+:::
+
+## Response envelope
+
+Every API response is wrapped:
+
+```json
+{
+  "success": true,
+  "data": { /* endpoint-specific payload */ },
+  "message": null
+}
+```
+
+On error, `success` is `false`, `data` is `null`, and `message` carries a human-readable reason.

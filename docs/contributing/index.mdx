@@ -1,0 +1,81 @@
+---
+sidebar_position: 1
+---
+
+# Contributing
+
+Thanks for being here. KitsuneCommand is MIT-licensed and welcomes PRs.
+
+## Prerequisites
+
+- [.NET SDK 8.0 or newer](https://dotnet.microsoft.com/download)
+- [Node.js 18 or newer](https://nodejs.org/)
+- A 7 Days to Die dedicated server install to copy game DLLs from
+
+## Get the game DLLs
+
+Copy these six files from your 7D2D install's `7DaysToDie_Data/Managed/` folder into `src/KitsuneCommand/7dtd-binaries/`:
+
+- `Assembly-CSharp.dll`
+- `Assembly-CSharp-firstpass.dll`
+- `LogLibrary.dll`
+- `UnityEngine.dll`
+- `UnityEngine.CoreModule.dll`
+- `0Harmony.dll`
+
+These are gitignored because redistributing them is not kosher. The build references them directly.
+
+## Frontend dev loop
+
+```bash
+cd frontend
+npm install
+npm run dev      # Vite dev server with hot reload, proxies API to :8888
+```
+
+Make sure `EnableCors` is `true` in your running server's `appsettings.json` while developing.
+
+## Backend dev loop
+
+```bash
+dotnet build src/KitsuneCommand/KitsuneCommand.csproj -c Release
+```
+
+Then copy the built DLL into your server's `Mods/KitsuneCommand/` and restart the server.
+
+## Full build + package
+
+```powershell
+.\tools\build.ps1                    # Both platforms
+.\tools\build.ps1 -Platform windows  # Windows only
+.\tools\build.ps1 -Platform linux    # Linux only
+```
+
+Output lands in `dist/KitsuneCommand/`, ready to drop into a server's `Mods/` folder.
+
+## Tests
+
+### Backend (NUnit, 62 tests)
+
+```bash
+cd src/KitsuneCommand.Tests
+dotnet test
+```
+
+Covers repositories (real SQLite), service unit tests, and the mod event bus.
+
+### Frontend (Vitest, 21 tests)
+
+```bash
+cd frontend
+npm run test:run
+```
+
+Covers Pinia stores and API clients.
+
+## PR checklist
+
+- Backend changes compile cleanly under .NET Framework 4.8 (not just modern .NET).
+- Frontend changes pass `npm run build` and `npm run test:run`.
+- New controllers follow the existing envelope response shape (`{ success, data, message }`).
+- User-facing strings are added to `en.ts` and, ideally, translated in the other four locale files.
