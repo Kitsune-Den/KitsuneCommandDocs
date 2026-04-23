@@ -24,6 +24,8 @@ const config: Config = {
     locales: ['en'],
   },
 
+  clientModules: [require.resolve('./src/clientModules/matomo.ts')],
+
   presets: [
     [
       'classic',
