@@ -122,6 +122,10 @@ const config: Config = {
               label: 'Docs source',
               href: 'https://github.com/Kitsune-Den/KitsuneCommandDocs',
             },
+            {
+              label: 'Privacy',
+              href: 'https://kitsuneden.net/privacy/',
+            },
           ],
         },
       ],
