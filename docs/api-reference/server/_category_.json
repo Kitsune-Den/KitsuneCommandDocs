@@ -1,0 +1,8 @@
+{
+  "label": "Server",
+  "position": 11,
+  "link": {
+    "type": "generated-index",
+    "description": "Server control, updates, config, mods, and backups — the self-hoster controllers."
+  }
+}

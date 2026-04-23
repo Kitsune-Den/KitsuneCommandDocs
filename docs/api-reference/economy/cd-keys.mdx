@@ -1,0 +1,30 @@
+---
+sidebar_position: 3
+---
+
+# CD Keys
+
+Promo-code CRUD and redemption.
+
+## CdKeyController
+
+- **Route prefix:** `api/cdkeys`
+- **Auth:** `[Authorize]`. Most endpoints are **admin-only**; redeem is admin or moderator.
+
+| Method | Path | Description | Request | Response |
+|--------|------|-------------|---------|----------|
+| GET | `/` | List CD keys (**admin**), paginated | `?pageIndex&pageSize&search` | `PaginatedResponse<CdKey>` |
+| GET | `/{id}` | CD key detail with linked items/commands (**admin**) | — | `CdKeyDetailResponse` |
+| POST | `/` | Create CD key (**admin**) | `{ key, maxRedeemCount, expiryAt, description, itemIds, commandIds }` | `{ id }` |
+| PUT | `/{id}` | Update CD key (**admin**) | same as POST | `{ id }` |
+| DELETE | `/{id}` | Delete CD key (**admin**) | — | `string` |
+| POST | `/{id}/redeem` | Redeem for a player (**admin/moderator**) | `{ playerId, playerName }` | `{ message, deliveryLog, remainingRedemptions }` |
+| GET | `/{id}/redemptions` | Redemption records for one key (**admin**) | — | `CdKeyRedeemRecord[]` |
+| GET | `/redemptions` | All redemption records (**admin**), paginated | `?pageIndex&pageSize&cdKeyId` | `PaginatedResponse<CdKeyRedeemRecord>` |
+
+## Notes
+
+- `key` is the human-facing code the player enters. Keep it reasonably opaque; it's case-sensitive.
+- `maxRedeemCount` is enforced server-side. Once exhausted, redeem returns an error.
+- `expiryAt` is an ISO-8601 timestamp. Past-expiry keys are still listed but return an error on redeem.
+- Redeem requires the target player to be **online** at the time of the call.

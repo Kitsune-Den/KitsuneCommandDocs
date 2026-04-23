@@ -1,0 +1,27 @@
+---
+sidebar_position: 12
+---
+
+# Discord
+
+Discord bot settings, connection status, and test payload.
+
+## DiscordSettingsController
+
+- **Route prefix:** `api/settings/discord`
+- **Auth:** All endpoints require **admin** role.
+
+| Method | Path | Description | Request | Response |
+|--------|------|-------------|---------|----------|
+| GET | `/` | Current Discord settings (bot token masked) | — | `{ enabled, botToken (masked), chatBridgeEnabled, chatBridgeChannelId, eventNotificationsEnabled, eventChannelId, notifyPlayerJoin, notifyPlayerLeave, notifyServerStart, notifyServerStop, notifyBloodMoon, slashCommandsEnabled, serverName, showPlayerCountInStatus }` |
+| PUT | `/` | Update Discord settings | Same shape as GET, with `botToken` in plaintext | `string` |
+| GET | `/status` | Bot connection status | — | `{ isConnected, botUsername, latencyMs }` |
+| POST | `/test` | Send a test embed to the configured event channel | — | `string` |
+
+## Notes
+
+- The `botToken` field is returned **masked** on `GET` (to avoid leaking it back to someone inspecting the response). A `PUT` expects the plaintext token.
+- `slashCommandsEnabled` toggles a registration call on bot startup. Discord caches command registration up to an hour, so command changes may take a while to appear.
+- `POST /test` is a quick way to verify the bot has permissions to post in the event channel without waiting for a real event.
+
+See also: [Configuration → Discord Integration](../configuration/discord.mdx) for setup walkthrough.

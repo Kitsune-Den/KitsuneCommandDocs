@@ -1,0 +1,33 @@
+---
+sidebar_position: 3
+---
+
+# Monitoring
+
+Dashboard aggregates and map rendering.
+
+## DashboardController
+
+- **Route prefix:** `api/dashboard`
+- **Auth:** `[Authorize]`
+
+| Method | Path | Description | Request | Response |
+|--------|------|-------------|---------|----------|
+| GET | `/stats` | Aggregated dashboard statistics across features | — | `{ totalPlayers, totalPointsInCirculation, totalPurchases, totalPointsSpent, totalStoreItems, totalTeleports, totalCities, totalCdKeys, totalRedemptions, totalVipGifts, totalSchedules, activeSchedules, totalChatMessages }` |
+
+## MapController
+
+- **Route prefix:** `api/map`
+- **Auth:** Mixed — map tiles and info are anonymous; marker data requires `[Authorize]`.
+
+| Method | Path | Description | Request | Response |
+|--------|------|-------------|---------|----------|
+| GET | `/tile/{z}/{x}/{y}` | 256×256 PNG map tile (anonymous) | — | PNG (binary) |
+| GET | `/markers` | Current player positions as map markers | — | `{ entityId, name, x, y, z, type }[]` |
+| GET | `/info` | Map metadata: world size, bounds, zoom levels (anonymous) | — | `{ isAvailable, ... }` |
+
+## Notes
+
+- Tile rendering uses SkiaSharp on the server side. First-time tile requests are slow while rendering; subsequent requests hit a disk cache.
+- The marker endpoint is polled by the web panel every 5 seconds.
+- `/info` and `/tile/*` are anonymous so a public map viewer could embed them without authentication.

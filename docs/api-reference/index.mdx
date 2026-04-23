@@ -4,41 +4,21 @@ sidebar_position: 1
 
 # REST API Reference
 
-KitsuneCommand exposes a JSON REST API on port **8888** (internal; proxied through port 8890 with the included frontend). Endpoints are grouped by controller.
+KitsuneCommand exposes a JSON REST API on port **8888** (internal; proxied through port 8890 with the bundled frontend). Endpoints are grouped by feature area.
 
 ## Authentication
 
-All non-auth endpoints require a bearer token obtained from `POST /api/auth/login`. See **Auth** below for details.
+Every non-auth endpoint requires a **bearer token** obtained from [`POST /api/auth/login`](./auth.mdx). Include it as:
 
-## Controller groups
+```
+Authorization: Bearer <access_token>
+```
 
-| Group | Controllers |
-|-------|------------|
-| Auth | `AuthController` |
-| Dashboard | `DashboardController` |
-| Players | `PlayersController`, `PlayerMetadataController` |
-| Chat | `ChatController`, `ChatCommandSettingsController` |
-| Tickets | `TicketsController` |
-| Economy — Points | `PointsController`, `PointsSettingsController` |
-| Economy — Store | `StoreController`, `StoreSettingsController` |
-| Economy — CD Keys | `CdKeyController` |
-| Economy — VIP | `VipGiftController` |
-| Teleport | `TeleportController`, `TeleportSettingsController` |
-| Events | `BloodMoonVoteController`, `TaskScheduleController` |
-| Content | `GameItemController` |
-| Server — Control | `ServerController`, `ServerUpdateController` |
-| Server — Config | `ConfigController` |
-| Server — Mods | `ModsController`, `ModDiscoveryController` |
-| Server — Backups | `BackupsController` |
-| Integrations | `DiscordSettingsController` |
-
-:::info In progress
-Per-endpoint tables (method, path, request body, response shape) are being authored. In the meantime, all controllers follow the same conventions: `Route("api/<group>")`, bearer auth, envelope response `{ success, data, message }`.
-:::
+Tokens expire after `AccessTokenExpireMinutes` (default 24h). Use `POST /api/auth/refresh` with the refresh token to rotate without re-authenticating.
 
 ## Response envelope
 
-Every API response is wrapped:
+Every response is wrapped in an envelope:
 
 ```json
 {
@@ -48,4 +28,55 @@ Every API response is wrapped:
 }
 ```
 
-On error, `success` is `false`, `data` is `null`, and `message` carries a human-readable reason.
+On error: `success: false`, `data: null`, and `message` carries a human-readable reason. HTTP status codes follow convention (200, 400, 401, 403, 404, 500).
+
+## Pagination
+
+List endpoints use query parameters:
+
+| Param | Default | Description |
+|-------|---------|-------------|
+| `pageIndex` | `0` | Zero-based page index |
+| `pageSize` | `20` | Items per page |
+| `search` | — | Optional search string |
+
+Paginated responses wrap the result as:
+
+```json
+{
+  "items": [ /* page contents */ ],
+  "total": 123,
+  "pageIndex": 0,
+  "pageSize": 20
+}
+```
+
+## Role model
+
+Three roles, in order of permission:
+
+- **viewer** — read-only
+- **moderator** — most actions on players, tickets, economy; can't touch server admin
+- **admin** — everything
+
+Endpoint docs call out the minimum role required when it's stricter than `[Authorize]`.
+
+## Feature groups
+
+- [**Auth & Users**](./auth.mdx) — login, token refresh, password management, user admin
+- [**Monitoring**](./monitoring.mdx) — dashboard stats, map tiles, player markers
+- [**Players**](./players.mdx) — online/offline players, detail, actions, metadata
+- [**Chat**](./chat.mdx) — chat history, send, chat command settings
+- [**Tickets**](./tickets.mdx) — support ticket queue
+- **Economy** — [Points](./economy/points.mdx), [Store](./economy/store.mdx), [CD Keys](./economy/cd-keys.mdx), [VIP Gifts](./economy/vip-gifts.mdx)
+- [**Teleport**](./teleport.mdx) — cities, homes, history
+- [**Events**](./events.mdx) — Blood Moon vote, task scheduler
+- [**Content**](./game-items.mdx) — game item database
+- **Server** — [Control](./server/control.mdx), [Updates](./server/updates.mdx), [Config](./server/config.mdx), [Mods](./server/mods.mdx), [Backups](./server/backups.mdx)
+- [**Discord**](./discord.mdx) — Discord bot settings
+
+## Conventions used below
+
+- **Path column** is relative to each page's stated route prefix.
+- **Request / Response** use a shorthand: `{ field, field, field }` lists top-level field names. `DtoName[]` is an array. `—` means no body.
+- Admin-only endpoints are called out in the Description column.

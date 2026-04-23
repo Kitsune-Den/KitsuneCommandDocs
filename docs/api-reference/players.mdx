@@ -1,0 +1,43 @@
+---
+sidebar_position: 4
+---
+
+# Players
+
+Online/offline players, detail views, admin actions, and per-player metadata.
+
+## PlayersController
+
+- **Route prefix:** `api/players`
+- **Auth:** `[Authorize]`
+
+| Method | Path | Description | Request | Response |
+|--------|------|-------------|---------|----------|
+| GET | `/` | List currently online players | — | `PlayerInfo[]` |
+| GET | `/known` | All known players (online + offline), paginated | `?pageIndex&pageSize&search` | `{ items: PlayerInfo[], total, pageIndex, pageSize }` |
+| GET | `/{entityId}` | Player detail with inventory and skills | — | `PlayerDetailDto` |
+| GET | `/{entityId}/inventory` | Player inventory (bag + belt) | — | `{ bagItems, beltItems }` |
+| GET | `/{entityId}/skills` | Player skills and perks | — | `SkillDto[]` |
+| POST | `/{entityId}/kick` | Kick player | `{ reason }` | `{ output }` |
+| POST | `/{entityId}/ban` | Ban player | `{ reason, durationMinutes }` | `{ output }` |
+| POST | `/{entityId}/give` | Give item to player | `{ itemName, count, quality }` | `{ message }` |
+| POST | `/{entityId}/teleport` | Teleport player to coordinates | `{ x, y, z }` | `{ output }` |
+| POST | `/{entityId}/admin-level` | Change in-game admin level | `{ level }` | `{ output }` |
+
+## PlayerMetadataController
+
+Admin-set metadata attached to a player (display-name color, custom tag, free-form notes).
+
+- **Route prefix:** `api/players/metadata`
+- **Auth:** All endpoints require **admin** role.
+
+| Method | Path | Description | Request | Response |
+|--------|------|-------------|---------|----------|
+| GET | `/` | All player metadata, keyed by playerId | — | `{ [playerId]: PlayerMetadata }` |
+| GET | `/{playerId}` | Metadata for one player | — | `PlayerMetadata` |
+| PUT | `/{playerId}` | Create or update metadata | `{ nameColor, customTag, notes }` | `PlayerMetadata` |
+
+## Notes
+
+- `entityId` is the in-game integer entity ID (unstable across sessions). `playerId` in metadata endpoints is the **stable** player ID (Steam ID).
+- Give, kick, ban, teleport, and admin-level actions require the player to be **online**. Offline calls return an error.

@@ -1,0 +1,42 @@
+---
+sidebar_position: 9
+---
+
+# Events
+
+Blood Moon voting and the automated task scheduler.
+
+## BloodMoonVoteController
+
+- **Route prefix:** `api/bloodmoonvote`
+- **Auth:** `status` is `[Authorize]`-only; settings and actions require **admin**.
+
+| Method | Path | Description | Request | Response |
+|--------|------|-------------|---------|----------|
+| GET | `/status` | Current vote status | — | `VoteStatus` |
+| GET | `/settings` | Get vote settings (**admin**) | — | `BloodMoonVoteSettings` |
+| PUT | `/settings` | Update vote settings (**admin**) | `{ thresholdValue, thresholdType, cooldownMinutes, allowVoteHoursBefore, commandName }` | `string` |
+| POST | `/force-skip` | Force-skip the current vote (**admin**) | — | `string` |
+
+`VoteStatus` fields: whether a vote is active, current tallies per option, time remaining, the player's own vote (if applicable).
+
+## TaskScheduleController
+
+- **Route prefix:** `api/schedules`
+- **Auth:** All endpoints require **admin** role.
+
+| Method | Path | Description | Request | Response |
+|--------|------|-------------|---------|----------|
+| GET | `/` | List task schedules, paginated | `?pageIndex&pageSize&search` | `PaginatedResponse<TaskScheduleDetailResponse>` |
+| GET | `/{id}` | Schedule detail with linked commands | — | `TaskScheduleDetailResponse` |
+| POST | `/` | Create schedule | `{ name, description, intervalMinutes, commandIds }` | `{ id }` |
+| PUT | `/{id}` | Update schedule | `{ name, description, intervalMinutes, isEnabled, commandIds }` | `{ id }` |
+| DELETE | `/{id}` | Delete schedule | — | `string` |
+| POST | `/{id}/run` | Trigger task immediately | — | `{ message, results }` |
+| POST | `/{id}/toggle` | Toggle enabled / disabled | — | `{ id, isEnabled, message }` |
+
+## Notes
+
+- `intervalMinutes` accepts any positive integer. The UI surfaces preset buttons, but the API is not bound by them.
+- Force-skip both ends the vote and applies the current leading option. With zero votes cast, the default difficulty wins.
+- Manual `run` does not affect the normal schedule — `Next Run` stays on its existing cadence.

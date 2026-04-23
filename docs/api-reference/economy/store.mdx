@@ -1,0 +1,59 @@
+---
+sidebar_position: 2
+---
+
+# Store
+
+Store goods, item definitions, command definitions, and purchase history.
+
+## StoreController
+
+- **Route prefix:** `api/store`
+- **Auth:** `[Authorize]`. Create/update/delete are admin-only; purchase is admin or moderator.
+
+### Goods (store listings)
+
+| Method | Path | Description | Request | Response |
+|--------|------|-------------|---------|----------|
+| GET | `/goods` | Browse all goods, paginated | `?pageIndex&pageSize&search` | `PaginatedResponse<Goods>` |
+| GET | `/goods/{id}` | Get goods entry with linked items and commands | — | `GoodsDetailResponse` |
+| POST | `/goods` | Create goods (**admin**) | `{ name, price, description, itemIds, commandIds }` | `{ id }` |
+| PUT | `/goods/{id}` | Update goods (**admin**) | `{ name, price, description, itemIds, commandIds }` | `{ id }` |
+| DELETE | `/goods/{id}` | Delete goods (**admin**) | — | `string` |
+| POST | `/goods/{id}/buy` | Purchase on behalf of a player (**admin/moderator**) | `{ playerId, playerName }` | `{ message, newBalance, deliveryLog }` |
+| GET | `/history` | Purchase history (optionally filtered by player) | `?pageIndex&pageSize&playerId` | `PaginatedResponse<PurchaseRecord>` |
+
+### Item definitions
+
+| Method | Path | Description | Request | Response |
+|--------|------|-------------|---------|----------|
+| GET | `/item-definitions` | All item definitions | — | `ItemDefinition[]` |
+| GET | `/item-definitions/{id}` | Single item definition | — | `ItemDefinition` |
+| POST | `/item-definitions` | Create (**admin**) | `{ itemName, count, quality, durability, description }` | `{ id }` |
+| PUT | `/item-definitions/{id}` | Update (**admin**) | same as POST | `{ id }` |
+| DELETE | `/item-definitions/{id}` | Delete (**admin**) | — | `string` |
+
+### Command definitions
+
+| Method | Path | Description | Request | Response |
+|--------|------|-------------|---------|----------|
+| GET | `/command-definitions` | All command definitions | — | `CommandDefinition[]` |
+| GET | `/command-definitions/{id}` | Single | — | `CommandDefinition` |
+| POST | `/command-definitions` | Create (**admin**) | `{ command, runInMainThread, description }` | `{ id }` |
+| PUT | `/command-definitions/{id}` | Update (**admin**) | same as POST | `{ id }` |
+| DELETE | `/command-definitions/{id}` | Delete (**admin**) | — | `string` |
+
+## StoreSettingsController
+
+- **Route prefix:** `api/settings/store`
+- **Auth:** **admin** role required.
+
+| Method | Path | Description | Request | Response |
+|--------|------|-------------|---------|----------|
+| GET | `/` | Current store settings | — | `StoreSettings` |
+| PUT | `/` | Update store settings | `{ purchaseCooldownSeconds, maxDailyPurchases, priceMultiplier }` | `string` |
+
+## Notes
+
+- Goods are composed: a goods entry references **item definitions** and **command definitions** by ID, so reusable payload pieces can be mixed into multiple listings.
+- `priceMultiplier` (store settings) scales all displayed prices at runtime without editing each goods row.

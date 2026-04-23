@@ -1,0 +1,35 @@
+---
+sidebar_position: 1
+---
+
+# Points
+
+Player point balances and economy settings.
+
+## PointsController
+
+- **Route prefix:** `api/points`
+- **Auth:** `[Authorize]` on all endpoints. Adjust and sign-in require elevated roles as noted.
+
+| Method | Path | Description | Request | Response |
+|--------|------|-------------|---------|----------|
+| GET | `/` | List all player points, paginated | `?pageIndex&pageSize&search` | `PaginatedResponse<PointsInfo>` |
+| GET | `/{playerId}` | Get a player's points | — | `PointsInfo` |
+| POST | `/{playerId}/adjust` | Adjust player's points (**admin only**) | `{ amount, reason }` | `{ playerId, playerName, points, change, reason }` |
+| POST | `/{playerId}/sign-in` | Trigger daily sign-in bonus (**admin/moderator**) | — | `{ playerId, message, awarded, points, change }` |
+
+## PointsSettingsController
+
+- **Route prefix:** `api/settings/points`
+- **Auth:** **admin** role required.
+
+| Method | Path | Description | Request | Response |
+|--------|------|-------------|---------|----------|
+| GET | `/` | Current points settings | — | `PointsSettings` |
+| PUT | `/` | Update points settings | `{ zombieKillPoints, playerKillPoints, signInBonus, playtimePointsPerHour, playtimeIntervalMinutes }` | `string` |
+
+## Notes
+
+- `playerId` here is the stable in-game player ID (Steam ID).
+- `amount` on adjust can be negative; the reason is required and recorded for audit.
+- Playtime bonus accrues on a timer (`playtimeIntervalMinutes`) while the player is online, at the configured hourly rate.

@@ -1,0 +1,26 @@
+---
+sidebar_position: 2
+---
+
+# Server Updates
+
+SteamCMD-driven auto-update configuration and credential management.
+
+## ServerUpdateController
+
+- **Route prefix:** `api/server-update`
+- **Auth:** All endpoints require **admin** role.
+
+| Method | Path | Description | Request | Response |
+|--------|------|-------------|---------|----------|
+| GET | `/settings` | Current update settings | — | `ServerUpdateSettings` |
+| PUT | `/settings` | Update settings | `{ autoUpdate, branch }` | `string` |
+| GET | `/config-bak` | Read the sticky `serverconfig.xml.bak` | — | `{ data }` |
+| PUT | `/config-bak` | Write to `serverconfig.xml.bak` | `{ content }` | `string` |
+| POST | `/steam-auth` | Run `steamcmd login` to cache credentials | `{ password, guardCode }` | `string` |
+
+## Notes
+
+- `config-bak` is the **safety-net** copy of `serverconfig.xml` that can be restored after a Steam update overwrites the live file.
+- `/steam-auth` kicks off an interactive SteamCMD login. The 2FA Steam Guard code is time-limited; if login fails, grab a fresh code and retry.
+- Cached credentials are per-server (stored in SteamCMD's local state), not per-panel-user.

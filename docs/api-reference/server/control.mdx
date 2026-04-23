@@ -1,0 +1,27 @@
+---
+sidebar_position: 1
+---
+
+# Server Control
+
+Server info, stats, and lifecycle actions.
+
+## ServerController
+
+- **Route prefix:** `api/server`
+- **Auth:** `[Authorize]`. Command/save/shutdown/restart require **admin**.
+
+| Method | Path | Description | Request | Response |
+|--------|------|-------------|---------|----------|
+| GET | `/info` | Server identity, version, world, current day/time, registration status | — | `{ serverName, serverPort, maxPlayers, gameWorld, gameName, gameMode, difficulty, dayNightLength, bloodMoonFrequency, currentDay, currentTime, onlinePlayers, version, kitsuneCommandVersion, localIp, publicIp, serverVisibility, steamRegistered, eosRegistered, steamServerId }` |
+| GET | `/stats` | Performance stats | — | `{ fps, entityCount, playerCount, uptime, gcMemory, workingSetMemory, peakWorkingSetMemory, threadCount, system }` |
+| POST | `/command` | Execute console command (**admin**) | `{ command }` | `{ output }` |
+| POST | `/save` | Trigger world save (**admin**) | — | `{ message }` |
+| POST | `/shutdown` | Graceful shutdown with delay (**admin**) | `{ delaySeconds }` | `string` |
+| POST | `/restart` | Restart via systemctl or in-game shutdown (**admin**) | `{ serviceName }` | `string` |
+
+## Notes
+
+- `/command` is the backing endpoint for the web Console view. Output streams via WebSocket, but the initial invocation is HTTP.
+- `/shutdown` broadcasts a warning to connected players, then exits cleanly after `delaySeconds`. If `delaySeconds` is 0, the warning is skipped.
+- `/restart` on Linux uses `systemctl restart <serviceName>`. On Windows, it triggers an in-game shutdown and expects an external supervisor to relaunch.

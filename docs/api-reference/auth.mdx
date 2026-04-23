@@ -1,0 +1,42 @@
+---
+sidebar_position: 2
+---
+
+# Auth & Users
+
+Authentication, session management, and admin user CRUD.
+
+## AuthController
+
+- **Route prefix:** `api/auth`
+- **Auth:** `[Authorize]` except where noted
+
+| Method | Path | Description | Request | Response |
+|--------|------|-------------|---------|----------|
+| POST | `/login` | Obtain access and refresh tokens (anonymous) | `{ username, password }` | `{ accessToken, refreshToken, expiresAt }` |
+| POST | `/refresh` | Rotate access token using refresh token (anonymous) | `{ refreshToken }` | `{ accessToken, refreshToken, expiresAt }` |
+| POST | `/logout` | Invalidate current refresh token | — | `—` |
+| GET | `/me` | Current user info from token claims | — | `{ username, role, userId, displayName }` |
+| POST | `/change-password` | Change current user's password | `{ currentPassword, newPassword }` | `{ message }` |
+
+## UserController
+
+Admin CRUD for panel users. Separate from in-game players.
+
+- **Route prefix:** `api/users`
+- **Auth:** All endpoints require **admin** role.
+
+| Method | Path | Description | Request | Response |
+|--------|------|-------------|---------|----------|
+| GET | `/` | List all panel users | — | `UserResponse[]` |
+| GET | `/{id}` | Get single user | — | `UserResponse` |
+| POST | `/` | Create user | `{ username, password, displayName, role }` | `UserResponse` |
+| PUT | `/{id}` | Update display name / role / active status | `{ displayName, role, isActive }` | `UserResponse` |
+| POST | `/{id}/reset-password` | Reset another user's password | `{ newPassword }` | `string` |
+| DELETE | `/{id}` | Soft-delete (deactivate) user | — | `string` |
+
+## Notes
+
+- Passwords are hashed with BCrypt before storage. Plaintext is never persisted.
+- `UserResponse` includes `{ id, username, displayName, role, isActive, createdAt, lastLoginAt }`.
+- Deleting a user is a **soft delete** that flips `isActive` to `false`; the row stays for audit purposes.

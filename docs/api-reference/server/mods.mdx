@@ -1,0 +1,38 @@
+---
+sidebar_position: 4
+---
+
+# Mods
+
+Installed mod management and Nexus-powered discovery.
+
+## ModsController
+
+- **Route prefix:** `api/mods`
+- **Auth:** All endpoints require **admin** role.
+
+| Method | Path | Description | Request | Response |
+|--------|------|-------------|---------|----------|
+| GET | `/` | List installed mods | — | `ModInfo[]` |
+| POST | `/upload` | Upload a mod ZIP (supports mod packs) | Multipart form (`file`) | `ModUploadResult` |
+| DELETE | `/{modName}` | Delete by folder name | — | `string` |
+| POST | `/{modName}/toggle` | Toggle enabled/disabled | — | `string` |
+
+## ModDiscoveryController
+
+- **Route prefix:** `api/mods/discover`
+- **Auth:** All endpoints require **admin** role.
+
+| Method | Path | Description | Request | Response |
+|--------|------|-------------|---------|----------|
+| GET | `/search` | Search Nexus for mods (paginated, sortable) | `?q&sort&offset&count` | `SearchResult` |
+| GET | `/settings` | Nexus discovery settings | — | `{ hasApiKey, apiKey (masked), cacheDurationMinutes }` |
+| PUT | `/settings` | Update Nexus settings | `{ apiKey, cacheDurationMinutes }` | `string` |
+| POST | `/validate-key` | Validate a Nexus API key | `{ apiKey }` | `ValidationResult` |
+| POST | `/clear-cache` | Clear the mod search cache | — | `string` |
+
+## Notes
+
+- Upload supports **mod packs**: a ZIP that expands to multiple `Mods/<ModName>/` directories is unpacked in one go.
+- Toggle renames a mod folder in place (prefix or suffix), which is what makes the game skip it on next launch.
+- The Nexus API key is optional; most search use cases work without one, but rate limits and full metadata may require it.

@@ -1,0 +1,34 @@
+---
+sidebar_position: 5
+---
+
+# Chat
+
+Chat history, sending, and chat command configuration.
+
+## ChatController
+
+- **Route prefix:** `api/chat`
+- **Auth:** `[Authorize]`. `send` is blocked for viewers.
+
+| Method | Path | Description | Request | Response |
+|--------|------|-------------|---------|----------|
+| GET | `/history` | Paginated chat history with optional search and type filter | `?pageIndex&pageSize&search&chatType` | `PaginatedResponse<ChatRecord>` |
+| POST | `/send` | Send a chat message from the web panel into the game | `{ message, targetPlayer }` | `{ output }` |
+
+`chatType` values: `global`, `friends`, `party`, `whisper`.
+
+## ChatCommandSettingsController
+
+- **Route prefix:** `api/settings/chat-commands`
+- **Auth:** **admin** role required.
+
+| Method | Path | Description | Request | Response |
+|--------|------|-------------|---------|----------|
+| GET | `/` | Current chat command settings | — | `ChatCommandSettings` |
+| PUT | `/` | Update chat command settings | `{ prefix, defaultCooldownSeconds, homeCooldownSeconds, teleportCooldownSeconds, maxHomesPerPlayer }` | `string` |
+
+## Notes
+
+- Messages sent via `POST /send` appear in-game as **server messages**, not as the originating admin's player.
+- `targetPlayer` is optional; omit for a global broadcast, or set to a player name for a private whisper.

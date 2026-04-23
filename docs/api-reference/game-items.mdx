@@ -1,0 +1,26 @@
+---
+sidebar_position: 10
+---
+
+# Game Items
+
+Read-only reference data covering every item the game knows about.
+
+## GameItemController
+
+- **Route prefix:** `api/game-items`
+- **Auth:** `[Authorize]` on data endpoints; icons are anonymous.
+
+| Method | Path | Description | Request | Response |
+|--------|------|-------------|---------|----------|
+| GET | `/` | Paginated search of all game items | `?search&group&pageIndex&pageSize` | `SearchResult` |
+| GET | `/groups` | All item groups/categories | — | `string[]` |
+| GET | `/search` | Lightweight autocomplete | `?query&limit` | `GameItem[]` |
+| GET | `/by-name/{name}` | Item by exact internal name | — | `GameItem` |
+| GET | `/icon/{iconName}` | PNG icon (anonymous; optional size) | `?size` | PNG (binary) |
+
+## Notes
+
+- `GameItem` fields include `{ name, displayName, maxStackSize, hasQuality, groups, iconName }`.
+- The icon endpoint is anonymous so the game's assets can be embedded on public player profiles or third-party overlays.
+- `/search` is what the store, CD key, and VIP gift dialogs use for item autocomplete in the web panel.

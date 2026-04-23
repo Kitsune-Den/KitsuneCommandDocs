@@ -1,0 +1,27 @@
+---
+sidebar_position: 5
+---
+
+# Backups
+
+World-save backup CRUD and schedule settings.
+
+## BackupsController
+
+- **Route prefix:** `api/backups`
+- **Auth:** All endpoints require **admin** role.
+
+| Method | Path | Description | Request | Response |
+|--------|------|-------------|---------|----------|
+| GET | `/` | List all backup records | — | `BackupRecord[]` |
+| POST | `/` | Create manual backup | `{ notes }` | `BackupRecord` |
+| POST | `/{id}/restore` | Restore from a backup (creates a safety backup first) | — | `string` |
+| DELETE | `/{id}` | Delete backup file and record | — | `string` |
+| GET | `/settings` | Current schedule settings | — | `BackupSettings` |
+| PUT | `/settings` | Update schedule settings | `{ intervalMinutes, maxBackups, backupPath }` | `string` |
+
+## Notes
+
+- `BackupRecord` fields: `{ id, filename, worldName, size, createdAt, type, notes }`. `type` is one of `manual`, `scheduled`, `restore`.
+- Restore creates a **restore-point backup** of the current state before rolling back, so a bad restore is itself recoverable.
+- `maxBackups` pruning applies after successful scheduled or manual Create — restore points don't count toward the limit.

@@ -1,0 +1,27 @@
+---
+sidebar_position: 4
+---
+
+# VIP Gifts
+
+Recurring or one-time gift packages assigned to specific players.
+
+## VipGiftController
+
+- **Route prefix:** `api/vipgifts`
+- **Auth:** `[Authorize]` on all endpoints; all actions require **admin** role.
+
+| Method | Path | Description | Request | Response |
+|--------|------|-------------|---------|----------|
+| GET | `/` | List VIP gifts, paginated | `?pageIndex&pageSize&search` | `PaginatedResponse<VipGiftDetailResponse>` |
+| GET | `/{id}` | Gift detail with linked items and commands | — | `VipGiftDetailResponse` |
+| POST | `/` | Create VIP gift | `{ playerId, playerName, name, description, claimPeriod, itemIds, commandIds }` | `{ id }` |
+| PUT | `/{id}` | Update gift | `{ name, description, claimPeriod, playerName, itemIds, commandIds }` | `{ id }` |
+| DELETE | `/{id}` | Delete gift | — | `string` |
+| POST | `/{id}/claim` | Claim for the assigned player | — | `{ message, deliveryLog }` |
+
+## Notes
+
+- `claimPeriod` is one of `onetime`, `daily`, `weekly`, `monthly`.
+- Claim is idempotent for the current cooldown window: calling it twice in a single day for a daily gift returns an error the second time.
+- The actual in-game claim is usually triggered by the player, not the panel. The `/claim` endpoint is here mostly for testing and admin override.
