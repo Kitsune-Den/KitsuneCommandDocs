@@ -16,10 +16,10 @@ City waypoints, player homes, and the teleport audit log.
 | Method | Path | Description | Request | Response |
 |--------|------|-------------|---------|----------|
 | GET | `/cities` | List cities, paginated | `?pageIndex&pageSize&search` | `PaginatedResponse<CityLocation>` |
-| GET | `/cities/{id}` | Single city | — | `CityLocation` |
+| GET | `/cities/{id}` | Single city |  | `CityLocation` |
 | POST | `/cities` | Create city (**admin**) | `{ cityName, position, pointsRequired, viewDirection }` | `{ id }` |
 | PUT | `/cities/{id}` | Update city (**admin**) | same as POST | `{ id }` |
-| DELETE | `/cities/{id}` | Delete city (**admin**) | — | `string` |
+| DELETE | `/cities/{id}` | Delete city (**admin**) |  | `string` |
 | POST | `/cities/{id}/teleport` | Teleport player to city (**admin/moderator**) | `{ playerId, playerName }` | `{ message, output }` |
 
 ### Homes
@@ -27,8 +27,8 @@ City waypoints, player homes, and the teleport audit log.
 | Method | Path | Description | Request | Response |
 |--------|------|-------------|---------|----------|
 | GET | `/homes` | List all homes, paginated | `?pageIndex&pageSize&search` | `PaginatedResponse<HomeLocation>` |
-| GET | `/homes/player/{playerId}` | All homes for a player | — | `HomeLocation[]` |
-| DELETE | `/homes/{id}` | Delete home (**admin**) | — | `string` |
+| GET | `/homes/player/{playerId}` | All homes for a player |  | `HomeLocation[]` |
+| DELETE | `/homes/{id}` | Delete home (**admin**) |  | `string` |
 | POST | `/homes/{id}/teleport` | Teleport player to their home (**admin/moderator**) | `{ playerId }` | `{ message, output }` |
 
 ### History
@@ -44,11 +44,11 @@ City waypoints, player homes, and the teleport audit log.
 
 | Method | Path | Description | Request | Response |
 |--------|------|-------------|---------|----------|
-| GET | `/` | Current teleport settings | — | `TeleportSettings` |
+| GET | `/` | Current teleport settings |  | `TeleportSettings` |
 | PUT | `/` | Update teleport settings | `{ teleportDelaySeconds, defaultPointsCost }` | `string` |
 
 ## Notes
 
 - `pointsRequired` of `0` is **free**; any positive value costs the player that many points.
-- `teleportDelaySeconds` applies to player-initiated teleports only — admin-driven teleport from the panel is instant.
+- `teleportDelaySeconds` applies to player-initiated teleports only. Admin-driven teleport from the panel is instant.
 - Deleting a home doesn't refund the player. Use the Points endpoints for that if you need to.

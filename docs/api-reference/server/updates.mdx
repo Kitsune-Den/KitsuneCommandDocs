@@ -13,9 +13,9 @@ SteamCMD-driven auto-update configuration and credential management.
 
 | Method | Path | Description | Request | Response |
 |--------|------|-------------|---------|----------|
-| GET | `/settings` | Current update settings | — | `ServerUpdateSettings` |
+| GET | `/settings` | Current update settings |  | `ServerUpdateSettings` |
 | PUT | `/settings` | Update settings | `{ autoUpdate, branch }` | `string` |
-| GET | `/config-bak` | Read the sticky `serverconfig.xml.bak` | — | `{ data }` |
+| GET | `/config-bak` | Read the sticky `serverconfig.xml.bak` |  | `{ data }` |
 | PUT | `/config-bak` | Write to `serverconfig.xml.bak` | `{ content }` | `string` |
 | POST | `/steam-auth` | Run `steamcmd login` to cache credentials | `{ password, guardCode }` | `string` |
 

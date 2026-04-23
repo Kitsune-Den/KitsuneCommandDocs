@@ -14,9 +14,9 @@ Player point balances and economy settings.
 | Method | Path | Description | Request | Response |
 |--------|------|-------------|---------|----------|
 | GET | `/` | List all player points, paginated | `?pageIndex&pageSize&search` | `PaginatedResponse<PointsInfo>` |
-| GET | `/{playerId}` | Get a player's points | — | `PointsInfo` |
+| GET | `/{playerId}` | Get a player's points |  | `PointsInfo` |
 | POST | `/{playerId}/adjust` | Adjust player's points (**admin only**) | `{ amount, reason }` | `{ playerId, playerName, points, change, reason }` |
-| POST | `/{playerId}/sign-in` | Trigger daily sign-in bonus (**admin/moderator**) | — | `{ playerId, message, awarded, points, change }` |
+| POST | `/{playerId}/sign-in` | Trigger daily sign-in bonus (**admin/moderator**) |  | `{ playerId, message, awarded, points, change }` |
 
 ## PointsSettingsController
 
@@ -25,7 +25,7 @@ Player point balances and economy settings.
 
 | Method | Path | Description | Request | Response |
 |--------|------|-------------|---------|----------|
-| GET | `/` | Current points settings | — | `PointsSettings` |
+| GET | `/` | Current points settings |  | `PointsSettings` |
 | PUT | `/` | Update points settings | `{ zombieKillPoints, playerKillPoints, signInBonus, playtimePointsPerHour, playtimeIntervalMinutes }` | `string` |
 
 ## Notes

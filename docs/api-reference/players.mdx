@@ -13,11 +13,11 @@ Online/offline players, detail views, admin actions, and per-player metadata.
 
 | Method | Path | Description | Request | Response |
 |--------|------|-------------|---------|----------|
-| GET | `/` | List currently online players | — | `PlayerInfo[]` |
+| GET | `/` | List currently online players |  | `PlayerInfo[]` |
 | GET | `/known` | All known players (online + offline), paginated | `?pageIndex&pageSize&search` | `{ items: PlayerInfo[], total, pageIndex, pageSize }` |
-| GET | `/{entityId}` | Player detail with inventory and skills | — | `PlayerDetailDto` |
-| GET | `/{entityId}/inventory` | Player inventory (bag + belt) | — | `{ bagItems, beltItems }` |
-| GET | `/{entityId}/skills` | Player skills and perks | — | `SkillDto[]` |
+| GET | `/{entityId}` | Player detail with inventory and skills |  | `PlayerDetailDto` |
+| GET | `/{entityId}/inventory` | Player inventory (bag + belt) |  | `{ bagItems, beltItems }` |
+| GET | `/{entityId}/skills` | Player skills and perks |  | `SkillDto[]` |
 | POST | `/{entityId}/kick` | Kick player | `{ reason }` | `{ output }` |
 | POST | `/{entityId}/ban` | Ban player | `{ reason, durationMinutes }` | `{ output }` |
 | POST | `/{entityId}/give` | Give item to player | `{ itemName, count, quality }` | `{ message }` |
@@ -33,8 +33,8 @@ Admin-set metadata attached to a player (display-name color, custom tag, free-fo
 
 | Method | Path | Description | Request | Response |
 |--------|------|-------------|---------|----------|
-| GET | `/` | All player metadata, keyed by playerId | — | `{ [playerId]: PlayerMetadata }` |
-| GET | `/{playerId}` | Metadata for one player | — | `PlayerMetadata` |
+| GET | `/` | All player metadata, keyed by playerId |  | `{ [playerId]: PlayerMetadata }` |
+| GET | `/{playerId}` | Metadata for one player |  | `PlayerMetadata` |
 | PUT | `/{playerId}` | Create or update metadata | `{ nameColor, customTag, notes }` | `PlayerMetadata` |
 
 ## Notes

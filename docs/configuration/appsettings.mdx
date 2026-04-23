@@ -37,7 +37,7 @@ KitsuneCommand's server-side config lives at `<SaveGameDir>/KitsuneCommand/appse
 
 ## Security notes
 
-- Tokens are signed server-side. Rotate the secret (regenerated on first run) by deleting `KitsuneCommand.db` — but be aware this also wipes users, points, and purchase history, so only do it on a fresh install.
+- Tokens are signed server-side. Rotate the secret (regenerated on first run) by deleting `KitsuneCommand.db`. But be aware this also wipes users, points, and purchase history, so only do it on a fresh install.
 - `EnableCors: true` should only be used for local development. It widens the API surface to cross-origin callers.
 - The web panel port (8890) should be firewalled if the server is on the public internet and you only want authorized admins reaching it. Put it behind a VPN or a reverse proxy with HTTP auth for extra defense in depth.
 

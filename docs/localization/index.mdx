@@ -23,6 +23,8 @@ Users switch language from the panel's header; the selection is persisted per ac
 3. Register the new locale in the i18n setup (see `frontend/src/i18n/index.ts`).
 4. Open a PR against [Kitsune-Den/KitsuneCommand](https://github.com/Kitsune-Den/KitsuneCommand).
 
-:::tip Keep interpolation placeholders intact
-Don't translate text inside `{...}` placeholders — those are variable names the runtime substitutes at render time. Translate the surrounding copy, leave the brace contents alone.
+:::tip[Keep interpolation placeholders intact]
+
+Don't translate text inside `{...}` placeholders. Those are variable names the runtime substitutes at render time. Translate the surrounding copy, leave the brace contents alone.
+
 :::

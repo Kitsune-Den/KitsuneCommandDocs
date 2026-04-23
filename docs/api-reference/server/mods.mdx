@@ -13,10 +13,10 @@ Installed mod management and Nexus-powered discovery.
 
 | Method | Path | Description | Request | Response |
 |--------|------|-------------|---------|----------|
-| GET | `/` | List installed mods | — | `ModInfo[]` |
+| GET | `/` | List installed mods |  | `ModInfo[]` |
 | POST | `/upload` | Upload a mod ZIP (supports mod packs) | Multipart form (`file`) | `ModUploadResult` |
-| DELETE | `/{modName}` | Delete by folder name | — | `string` |
-| POST | `/{modName}/toggle` | Toggle enabled/disabled | — | `string` |
+| DELETE | `/{modName}` | Delete by folder name |  | `string` |
+| POST | `/{modName}/toggle` | Toggle enabled/disabled |  | `string` |
 
 ## ModDiscoveryController
 
@@ -26,10 +26,10 @@ Installed mod management and Nexus-powered discovery.
 | Method | Path | Description | Request | Response |
 |--------|------|-------------|---------|----------|
 | GET | `/search` | Search Nexus for mods (paginated, sortable) | `?q&sort&offset&count` | `SearchResult` |
-| GET | `/settings` | Nexus discovery settings | — | `{ hasApiKey, apiKey (masked), cacheDurationMinutes }` |
+| GET | `/settings` | Nexus discovery settings |  | `{ hasApiKey, apiKey (masked), cacheDurationMinutes }` |
 | PUT | `/settings` | Update Nexus settings | `{ apiKey, cacheDurationMinutes }` | `string` |
 | POST | `/validate-key` | Validate a Nexus API key | `{ apiKey }` | `ValidationResult` |
-| POST | `/clear-cache` | Clear the mod search cache | — | `string` |
+| POST | `/clear-cache` | Clear the mod search cache |  | `string` |
 
 ## Notes
 

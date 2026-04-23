@@ -15,8 +15,8 @@ Authentication, session management, and admin user CRUD.
 |--------|------|-------------|---------|----------|
 | POST | `/login` | Obtain access and refresh tokens (anonymous) | `{ username, password }` | `{ accessToken, refreshToken, expiresAt }` |
 | POST | `/refresh` | Rotate access token using refresh token (anonymous) | `{ refreshToken }` | `{ accessToken, refreshToken, expiresAt }` |
-| POST | `/logout` | Invalidate current refresh token | — | `—` |
-| GET | `/me` | Current user info from token claims | — | `{ username, role, userId, displayName }` |
+| POST | `/logout` | Invalidate current refresh token |  |  |
+| GET | `/me` | Current user info from token claims |  | `{ username, role, userId, displayName }` |
 | POST | `/change-password` | Change current user's password | `{ currentPassword, newPassword }` | `{ message }` |
 
 ## UserController
@@ -28,12 +28,12 @@ Admin CRUD for panel users. Separate from in-game players.
 
 | Method | Path | Description | Request | Response |
 |--------|------|-------------|---------|----------|
-| GET | `/` | List all panel users | — | `UserResponse[]` |
-| GET | `/{id}` | Get single user | — | `UserResponse` |
+| GET | `/` | List all panel users |  | `UserResponse[]` |
+| GET | `/{id}` | Get single user |  | `UserResponse` |
 | POST | `/` | Create user | `{ username, password, displayName, role }` | `UserResponse` |
 | PUT | `/{id}` | Update display name / role / active status | `{ displayName, role, isActive }` | `UserResponse` |
 | POST | `/{id}/reset-password` | Reset another user's password | `{ newPassword }` | `string` |
-| DELETE | `/{id}` | Soft-delete (deactivate) user | — | `string` |
+| DELETE | `/{id}` | Soft-delete (deactivate) user |  | `string` |
 
 ## Notes
 

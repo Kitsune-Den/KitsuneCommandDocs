@@ -13,14 +13,14 @@ sidebar_position: 3
 
 | Method | Path | Description | Request | Response |
 |--------|------|-------------|---------|----------|
-| GET | `/` | Current properties, field definitions, config file path | — | `{ properties, groups, configPath }` |
-| GET | `/raw` | Raw XML content of config file | — | `{ xml }` |
+| GET | `/` | Current properties, field definitions, config file path |  | `{ properties, groups, configPath }` |
+| GET | `/raw` | Raw XML content of config file |  | `{ xml }` |
 | PUT | `/` | Update properties (creates a backup first) | `{ [key]: string }` | `string` |
 | PUT | `/raw` | Replace raw XML (creates a backup first) | `{ xml }` | `string` |
-| GET | `/worlds` | Available world names (for config dropdowns) | — | `string[]` |
+| GET | `/worlds` | Available world names (for config dropdowns) |  | `string[]` |
 
 ## Notes
 
 - `properties` is a flat map of key → current value. `groups` describes the form UI structure (categories + field metadata). The web panel uses `groups` to render the Form tab; the bare API here returns both.
 - Both `PUT /` and `PUT /raw` create a timestamped backup of the previous file **before** writing. Backups are kept indefinitely; prune them manually if they grow.
-- `PUT /` is partial — only the keys you include are written. Untouched keys are preserved.
+- `PUT /` is partial. Only the keys you include are written. Untouched keys are preserved.

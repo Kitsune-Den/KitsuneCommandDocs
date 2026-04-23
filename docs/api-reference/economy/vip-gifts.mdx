@@ -14,11 +14,11 @@ Recurring or one-time gift packages assigned to specific players.
 | Method | Path | Description | Request | Response |
 |--------|------|-------------|---------|----------|
 | GET | `/` | List VIP gifts, paginated | `?pageIndex&pageSize&search` | `PaginatedResponse<VipGiftDetailResponse>` |
-| GET | `/{id}` | Gift detail with linked items and commands | — | `VipGiftDetailResponse` |
+| GET | `/{id}` | Gift detail with linked items and commands |  | `VipGiftDetailResponse` |
 | POST | `/` | Create VIP gift | `{ playerId, playerName, name, description, claimPeriod, itemIds, commandIds }` | `{ id }` |
 | PUT | `/{id}` | Update gift | `{ name, description, claimPeriod, playerName, itemIds, commandIds }` | `{ id }` |
-| DELETE | `/{id}` | Delete gift | — | `string` |
-| POST | `/{id}/claim` | Claim for the assigned player | — | `{ message, deliveryLog }` |
+| DELETE | `/{id}` | Delete gift |  | `string` |
+| POST | `/{id}/claim` | Claim for the assigned player |  | `{ message, deliveryLog }` |
 
 ## Notes
 

@@ -14,12 +14,12 @@ Promo-code CRUD and redemption.
 | Method | Path | Description | Request | Response |
 |--------|------|-------------|---------|----------|
 | GET | `/` | List CD keys (**admin**), paginated | `?pageIndex&pageSize&search` | `PaginatedResponse<CdKey>` |
-| GET | `/{id}` | CD key detail with linked items/commands (**admin**) | — | `CdKeyDetailResponse` |
+| GET | `/{id}` | CD key detail with linked items/commands (**admin**) |  | `CdKeyDetailResponse` |
 | POST | `/` | Create CD key (**admin**) | `{ key, maxRedeemCount, expiryAt, description, itemIds, commandIds }` | `{ id }` |
 | PUT | `/{id}` | Update CD key (**admin**) | same as POST | `{ id }` |
-| DELETE | `/{id}` | Delete CD key (**admin**) | — | `string` |
+| DELETE | `/{id}` | Delete CD key (**admin**) |  | `string` |
 | POST | `/{id}/redeem` | Redeem for a player (**admin/moderator**) | `{ playerId, playerName }` | `{ message, deliveryLog, remainingRedemptions }` |
-| GET | `/{id}/redemptions` | Redemption records for one key (**admin**) | — | `CdKeyRedeemRecord[]` |
+| GET | `/{id}/redemptions` | Redemption records for one key (**admin**) |  | `CdKeyRedeemRecord[]` |
 | GET | `/redemptions` | All redemption records (**admin**), paginated | `?pageIndex&pageSize&cdKeyId` | `PaginatedResponse<CdKeyRedeemRecord>` |
 
 ## Notes

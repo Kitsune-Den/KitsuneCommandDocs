@@ -14,11 +14,11 @@ Player-submitted support tickets, triage, and reply delivery.
 | Method | Path | Description | Request | Response |
 |--------|------|-------------|---------|----------|
 | GET | `/` | List tickets with optional filters | `?pageIndex&pageSize&status&search` | `{ items: Ticket[], total }` |
-| GET | `/{id}` | Single ticket with message thread | — | `{ id, createdAt, updatedAt, playerId, playerName, subject, status, priority, assignedTo, messages }` |
+| GET | `/{id}` | Single ticket with message thread |  | `{ id, createdAt, updatedAt, playerId, playerName, subject, status, priority, assignedTo, messages }` |
 | POST | `/{id}/reply` | Reply to ticket; delivers in-game if online, queues if offline | `{ message }` | `{ messageId, delivered }` |
 | PUT | `/{id}/status` | Update ticket status and/or assignee | `{ status, assignedTo }` | `string` |
-| GET | `/stats` | Counts by status | — | `{ openCount, inProgressCount, closedCount }` |
-| GET | `/settings` | Ticket settings (admin only) | — | `TicketSettings` |
+| GET | `/stats` | Counts by status |  | `{ openCount, inProgressCount, closedCount }` |
+| GET | `/settings` | Ticket settings (admin only) |  | `TicketSettings` |
 | PUT | `/settings` | Update ticket settings (admin only) | `{ maxOpenTicketsPerPlayer, cooldownSeconds }` | `string` |
 
 ## Notes

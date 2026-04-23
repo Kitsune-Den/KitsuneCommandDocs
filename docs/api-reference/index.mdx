@@ -38,7 +38,7 @@ List endpoints use query parameters:
 |-------|---------|-------------|
 | `pageIndex` | `0` | Zero-based page index |
 | `pageSize` | `20` | Items per page |
-| `search` | — | Optional search string |
+| `search` |  | Optional search string |
 
 Paginated responses wrap the result as:
 
@@ -55,28 +55,28 @@ Paginated responses wrap the result as:
 
 Three roles, in order of permission:
 
-- **viewer** — read-only
-- **moderator** — most actions on players, tickets, economy; can't touch server admin
-- **admin** — everything
+- **viewer**. Read-only
+- **moderator**. Most actions on players, tickets, economy; can't touch server admin
+- **admin**. Everything
 
 Endpoint docs call out the minimum role required when it's stricter than `[Authorize]`.
 
 ## Feature groups
 
-- [**Auth & Users**](./auth.mdx) — login, token refresh, password management, user admin
-- [**Monitoring**](./monitoring.mdx) — dashboard stats, map tiles, player markers
-- [**Players**](./players.mdx) — online/offline players, detail, actions, metadata
-- [**Chat**](./chat.mdx) — chat history, send, chat command settings
-- [**Tickets**](./tickets.mdx) — support ticket queue
-- **Economy** — [Points](./economy/points.mdx), [Store](./economy/store.mdx), [CD Keys](./economy/cd-keys.mdx), [VIP Gifts](./economy/vip-gifts.mdx)
-- [**Teleport**](./teleport.mdx) — cities, homes, history
-- [**Events**](./events.mdx) — Blood Moon vote, task scheduler
-- [**Content**](./game-items.mdx) — game item database
-- **Server** — [Control](./server/control.mdx), [Updates](./server/updates.mdx), [Config](./server/config.mdx), [Mods](./server/mods.mdx), [Backups](./server/backups.mdx)
-- [**Discord**](./discord.mdx) — Discord bot settings
+- [**Auth & Users**](./auth.mdx). Login, token refresh, password management, user admin
+- [**Monitoring**](./monitoring.mdx). Dashboard stats, map tiles, player markers
+- [**Players**](./players.mdx). Online/offline players, detail, actions, metadata
+- [**Chat**](./chat.mdx). Chat history, send, chat command settings
+- [**Tickets**](./tickets.mdx). Support ticket queue
+- **Economy**. [Points](./economy/points.mdx), [Store](./economy/store.mdx), [CD Keys](./economy/cd-keys.mdx), [VIP Gifts](./economy/vip-gifts.mdx)
+- [**Teleport**](./teleport.mdx). Cities, homes, history
+- [**Events**](./events.mdx). Blood Moon vote, task scheduler
+- [**Content**](./game-items.mdx). Game item database
+- **Server**. [Control](./server/control.mdx), [Updates](./server/updates.mdx), [Config](./server/config.mdx), [Mods](./server/mods.mdx), [Backups](./server/backups.mdx)
+- [**Discord**](./discord.mdx). Discord bot settings
 
 ## Conventions used below
 
 - **Path column** is relative to each page's stated route prefix.
-- **Request / Response** use a shorthand: `{ field, field, field }` lists top-level field names. `DtoName[]` is an array. `—` means no body.
+- **Request / Response** use a shorthand: `{ field, field, field }` lists top-level field names. `DtoName[]` is an array. An empty cell means no body.
 - Admin-only endpoints are called out in the Description column.

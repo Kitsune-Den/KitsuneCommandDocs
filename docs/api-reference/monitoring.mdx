@@ -13,18 +13,18 @@ Dashboard aggregates and map rendering.
 
 | Method | Path | Description | Request | Response |
 |--------|------|-------------|---------|----------|
-| GET | `/stats` | Aggregated dashboard statistics across features | — | `{ totalPlayers, totalPointsInCirculation, totalPurchases, totalPointsSpent, totalStoreItems, totalTeleports, totalCities, totalCdKeys, totalRedemptions, totalVipGifts, totalSchedules, activeSchedules, totalChatMessages }` |
+| GET | `/stats` | Aggregated dashboard statistics across features |  | `{ totalPlayers, totalPointsInCirculation, totalPurchases, totalPointsSpent, totalStoreItems, totalTeleports, totalCities, totalCdKeys, totalRedemptions, totalVipGifts, totalSchedules, activeSchedules, totalChatMessages }` |
 
 ## MapController
 
 - **Route prefix:** `api/map`
-- **Auth:** Mixed — map tiles and info are anonymous; marker data requires `[Authorize]`.
+- **Auth:** Mixed. Map tiles and info are anonymous; marker data requires `[Authorize]`.
 
 | Method | Path | Description | Request | Response |
 |--------|------|-------------|---------|----------|
-| GET | `/tile/{z}/{x}/{y}` | 256×256 PNG map tile (anonymous) | — | PNG (binary) |
-| GET | `/markers` | Current player positions as map markers | — | `{ entityId, name, x, y, z, type }[]` |
-| GET | `/info` | Map metadata: world size, bounds, zoom levels (anonymous) | — | `{ isAvailable, ... }` |
+| GET | `/tile/{z}/{x}/{y}` | 256×256 PNG map tile (anonymous) |  | PNG (binary) |
+| GET | `/markers` | Current player positions as map markers |  | `{ entityId, name, x, y, z, type }[]` |
+| GET | `/info` | Map metadata: world size, bounds, zoom levels (anonymous) |  | `{ isAvailable, ... }` |
 
 ## Notes
 

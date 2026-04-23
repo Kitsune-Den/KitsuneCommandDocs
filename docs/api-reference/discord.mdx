@@ -13,10 +13,10 @@ Discord bot settings, connection status, and test payload.
 
 | Method | Path | Description | Request | Response |
 |--------|------|-------------|---------|----------|
-| GET | `/` | Current Discord settings (bot token masked) | — | `{ enabled, botToken (masked), chatBridgeEnabled, chatBridgeChannelId, eventNotificationsEnabled, eventChannelId, notifyPlayerJoin, notifyPlayerLeave, notifyServerStart, notifyServerStop, notifyBloodMoon, slashCommandsEnabled, serverName, showPlayerCountInStatus }` |
+| GET | `/` | Current Discord settings (bot token masked) |  | `{ enabled, botToken (masked), chatBridgeEnabled, chatBridgeChannelId, eventNotificationsEnabled, eventChannelId, notifyPlayerJoin, notifyPlayerLeave, notifyServerStart, notifyServerStop, notifyBloodMoon, slashCommandsEnabled, serverName, showPlayerCountInStatus }` |
 | PUT | `/` | Update Discord settings | Same shape as GET, with `botToken` in plaintext | `string` |
-| GET | `/status` | Bot connection status | — | `{ isConnected, botUsername, latencyMs }` |
-| POST | `/test` | Send a test embed to the configured event channel | — | `string` |
+| GET | `/status` | Bot connection status |  | `{ isConnected, botUsername, latencyMs }` |
+| POST | `/test` | Send a test embed to the configured event channel |  | `string` |
 
 ## Notes
 

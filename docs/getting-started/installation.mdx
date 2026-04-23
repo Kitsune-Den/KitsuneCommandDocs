@@ -29,8 +29,10 @@ Grab the latest ZIP from the [releases page](https://github.com/Kitsune-Den/Kits
         libSkiaSharp.so
 ```
 
-:::tip Don't rename the folder
+:::tip[Don't rename the folder]
+
 The mod folder must be named `KitsuneCommand`. The game loads mods by folder, and other paths (database, config, plugins) are resolved relative to it.
+
 :::
 
 ## 3. Start the server
@@ -47,7 +49,7 @@ Watch the console for a line like:
 [KitsuneCommand] Admin user created. Username: admin  Password: <random>
 ```
 
-Copy those credentials somewhere safe — they're shown only once.
+Copy those credentials somewhere safe. They're shown only once.
 
 ## 4. Open the web panel
 
@@ -59,11 +61,13 @@ http://your-server-ip:8890
 
 Log in with the admin credentials from step 3. You should land on the dashboard.
 
-:::note Port split
+:::note[Port split]
+
 The panel runs on port **8890**, not 8888. Port 8888 is the internal API, and 8890 is a lightweight frontend that handles login and proxies API calls. This split works around a compatibility issue between 7D2D's Unity/Mono runtime and OWIN's OAuth middleware.
+
 :::
 
 ## Next steps
 
-- [First Run](./first-run.mdx) — change the default password and set up your first users.
-- [Configuration](../configuration/appsettings.mdx) — ports, token lifetimes, CORS, and more.
+- [First Run](./first-run.mdx). Change the default password and set up your first users.
+- [Configuration](../configuration/appsettings.mdx). Ports, token lifetimes, CORS, and more.

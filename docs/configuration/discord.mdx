@@ -18,11 +18,11 @@ KitsuneCommand ships with a first-party Discord bot for chat bridging, event not
 | Setting | Default | Description |
 |---------|---------|-------------|
 | `Enabled` | `false` | Master switch. Leave off until the rest is configured. |
-| `BotToken` | — | Discord bot token (from the [Discord developer portal](https://discord.com/developers/applications)). |
+| `BotToken` |  | Discord bot token (from the [Discord developer portal](https://discord.com/developers/applications)). |
 | `ChatBridgeEnabled` | `true` | Bridge in-game chat to and from Discord. |
-| `ChatBridgeChannelId` | — | Channel ID that carries the chat bridge. |
+| `ChatBridgeChannelId` |  | Channel ID that carries the chat bridge. |
 | `EventNotificationsEnabled` | `true` | Enable the event-notification firehose. |
-| `EventChannelId` | — | Channel ID that receives event notifications. |
+| `EventChannelId` |  | Channel ID that receives event notifications. |
 | `NotifyPlayerJoin` | `true` | Post when a player connects. |
 | `NotifyPlayerLeave` | `true` | Post when a player disconnects. |
 | `NotifyServerStart` | `true` | Post when the server finishes starting up. |
@@ -40,8 +40,10 @@ KitsuneCommand ships with a first-party Discord bot for chat bridging, event not
 4. Copy the **Channel ID** (right-click the channel in Discord with developer mode on → Copy Channel ID) for your chat bridge and your events channel.
 5. Toggle **Enabled** on and save. The bot should come online in your server within a few seconds.
 
-:::caution Keep the token private
-The bot token grants full control of the bot account. Don't paste it into chat or commit it to a repo — the web panel stores it encrypted in the database.
+:::caution[Keep the token private]
+
+The bot token grants full control of the bot account. Don't paste it into chat or commit it to a repo. The web panel stores it encrypted in the database.
+
 :::
 
 ## Troubleshooting

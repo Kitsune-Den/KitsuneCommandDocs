@@ -13,10 +13,10 @@ Server info, stats, and lifecycle actions.
 
 | Method | Path | Description | Request | Response |
 |--------|------|-------------|---------|----------|
-| GET | `/info` | Server identity, version, world, current day/time, registration status | — | `{ serverName, serverPort, maxPlayers, gameWorld, gameName, gameMode, difficulty, dayNightLength, bloodMoonFrequency, currentDay, currentTime, onlinePlayers, version, kitsuneCommandVersion, localIp, publicIp, serverVisibility, steamRegistered, eosRegistered, steamServerId }` |
-| GET | `/stats` | Performance stats | — | `{ fps, entityCount, playerCount, uptime, gcMemory, workingSetMemory, peakWorkingSetMemory, threadCount, system }` |
+| GET | `/info` | Server identity, version, world, current day/time, registration status |  | `{ serverName, serverPort, maxPlayers, gameWorld, gameName, gameMode, difficulty, dayNightLength, bloodMoonFrequency, currentDay, currentTime, onlinePlayers, version, kitsuneCommandVersion, localIp, publicIp, serverVisibility, steamRegistered, eosRegistered, steamServerId }` |
+| GET | `/stats` | Performance stats |  | `{ fps, entityCount, playerCount, uptime, gcMemory, workingSetMemory, peakWorkingSetMemory, threadCount, system }` |
 | POST | `/command` | Execute console command (**admin**) | `{ command }` | `{ output }` |
-| POST | `/save` | Trigger world save (**admin**) | — | `{ message }` |
+| POST | `/save` | Trigger world save (**admin**) |  | `{ message }` |
 | POST | `/shutdown` | Graceful shutdown with delay (**admin**) | `{ delaySeconds }` | `string` |
 | POST | `/restart` | Restart via systemctl or in-game shutdown (**admin**) | `{ serviceName }` | `string` |
 

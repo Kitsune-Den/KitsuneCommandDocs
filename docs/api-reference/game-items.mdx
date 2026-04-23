@@ -14,9 +14,9 @@ Read-only reference data covering every item the game knows about.
 | Method | Path | Description | Request | Response |
 |--------|------|-------------|---------|----------|
 | GET | `/` | Paginated search of all game items | `?search&group&pageIndex&pageSize` | `SearchResult` |
-| GET | `/groups` | All item groups/categories | — | `string[]` |
+| GET | `/groups` | All item groups/categories |  | `string[]` |
 | GET | `/search` | Lightweight autocomplete | `?query&limit` | `GameItem[]` |
-| GET | `/by-name/{name}` | Item by exact internal name | — | `GameItem` |
+| GET | `/by-name/{name}` | Item by exact internal name |  | `GameItem` |
 | GET | `/icon/{iconName}` | PNG icon (anonymous; optional size) | `?size` | PNG (binary) |
 
 ## Notes
