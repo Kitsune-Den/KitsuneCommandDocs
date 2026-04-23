@@ -1,30 +1,126 @@
 /**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
+ * KitsuneDen palette, ported from kitsuneden.net's Tailwind theme.
+ *
+ * - Primary: fox-orange (#f59e0b)
+ * - Accent:  azure cyan (#00E5FF) — used for links on hover and tier-azure nods
+ * - Dark:    den-dark (#0a0a0f), den-surface (#1a1a24)
+ * - Fonts:   Inter (sans), JetBrains Mono (mono), Saira Stencil One (display)
  */
 
-/* You can override the default Infima variables here. */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Saira+Stencil+One&display=swap');
+
+/* ── Shared tokens ──────────────────────────────────────────── */
+
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
+  /* Fox-orange primary (light mode) */
+  --ifm-color-primary: #d97706;
+  --ifm-color-primary-dark: #c46b05;
+  --ifm-color-primary-darker: #b96505;
+  --ifm-color-primary-darkest: #985304;
+  --ifm-color-primary-light: #ee8208;
+  --ifm-color-primary-lighter: #f68a0c;
+  --ifm-color-primary-lightest: #f8a037;
+
+  /* KitsuneDen brand tokens (available to components) */
+  --kd-fox-orange: #f59e0b;
+  --kd-fox-amber: #d97706;
+  --kd-fox-warm: #fbbf24;
+  --kd-azure: #00E5FF;
+  --kd-ember: #ef4444;
+  --kd-moss: #22c55e;
+  --kd-den-dark: #0a0a0f;
+  --kd-den-deeper: #111118;
+  --kd-den-surface: #1a1a24;
+  --kd-den-muted: #242430;
+  --kd-den-border: #2e2e3a;
+
+  /* Typography */
+  --ifm-font-family-base: 'Inter', system-ui, -apple-system, sans-serif;
+  --ifm-font-family-monospace: 'JetBrains Mono', ui-monospace, 'Cascadia Code', monospace;
+  --ifm-heading-font-family: 'Inter', system-ui, sans-serif;
+  --kd-font-display: 'Saira Stencil One', system-ui, sans-serif;
+
   --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --docusaurus-highlighted-code-line-bg: rgba(245, 158, 11, 0.12);
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
+/* ── Dark mode (default look for KitsuneDen vibe) ─────────── */
+
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-color-primary: #f59e0b;
+  --ifm-color-primary-dark: #e08f08;
+  --ifm-color-primary-darker: #d48708;
+  --ifm-color-primary-darkest: #ae6f06;
+  --ifm-color-primary-light: #f7a725;
+  --ifm-color-primary-lighter: #f8ad34;
+  --ifm-color-primary-lightest: #fac060;
+
+  --ifm-background-color: var(--kd-den-dark);
+  --ifm-background-surface-color: var(--kd-den-surface);
+  --ifm-navbar-background-color: rgba(17, 17, 24, 0.85);
+  --ifm-footer-background-color: var(--kd-den-deeper);
+  --ifm-color-content: #f3f4f6;
+  --ifm-color-content-secondary: #9ca3af;
+  --ifm-toc-border-color: var(--kd-den-border);
+  --ifm-hr-background-color: var(--kd-den-border);
+
+  --docusaurus-highlighted-code-line-bg: rgba(245, 158, 11, 0.16);
+}
+
+/* ── Hero banner ───────────────────────────────────────────── */
+
+.hero--primary {
+  background: linear-gradient(
+    135deg,
+    var(--kd-den-deeper) 0%,
+    var(--kd-den-surface) 60%,
+    #231a12 100%
+  );
+  color: #f3f4f6;
+  border-bottom: 1px solid var(--kd-den-border);
+}
+
+.hero__title {
+  font-family: var(--kd-font-display);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--kd-fox-warm);
+  text-shadow: 0 0 24px rgba(245, 158, 11, 0.25);
+}
+
+.hero__subtitle {
+  color: #d1d5db;
+}
+
+/* ── Navbar polish ─────────────────────────────────────────── */
+
+[data-theme='dark'] .navbar {
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--kd-den-border);
+}
+
+.navbar__title {
+  font-family: var(--kd-font-display);
+  letter-spacing: 0.04em;
+}
+
+.navbar__logo img {
+  border-radius: 6px;
+}
+
+/* ── Code + inline accents ─────────────────────────────────── */
+
+[data-theme='dark'] code {
+  background: var(--kd-den-muted);
+  border: 1px solid var(--kd-den-border);
+}
+
+[data-theme='dark'] .theme-code-block {
+  border: 1px solid var(--kd-den-border);
+}
+
+/* Azure accent for hovered links — nods to the tier-azure cyan */
+.markdown a:hover,
+.menu__link:hover {
+  color: var(--kd-azure);
 }

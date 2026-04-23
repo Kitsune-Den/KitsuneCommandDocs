@@ -5,7 +5,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 const config: Config = {
   title: 'KitsuneCommand',
   tagline: 'Web-based server management for 7 Days to Die',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/favicon.png',
 
   future: {
     v4: true,
@@ -53,15 +53,16 @@ const config: Config = {
   ],
 
   themeConfig: {
-    image: 'img/docusaurus-social-card.jpg',
+    image: 'img/logo.png',
     colorMode: {
+      defaultMode: 'dark',
       respectPrefersColorScheme: true,
     },
     navbar: {
       title: 'KitsuneCommand',
       logo: {
-        alt: 'KitsuneCommand',
-        src: 'img/logo.svg',
+        alt: 'Kitsune-Den',
+        src: 'img/logo.png',
       },
       items: [
         {
