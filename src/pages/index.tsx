@@ -13,6 +13,11 @@ function HomepageHeader() {
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className="container">
+        <img
+          src="/docs/img/hero-logo.png"
+          alt="KitsuneCommand — 7D2D Server Command"
+          className={styles.heroLogo}
+        />
         <Heading as="h1" className="hero__title">
           {siteConfig.title}
         </Heading>

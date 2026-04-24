@@ -56,7 +56,7 @@ const config: Config = {
   ],
 
   themeConfig: {
-    image: 'img/logo.png',
+    image: 'img/hero-logo.png',
     colorMode: {
       defaultMode: 'dark',
       respectPrefersColorScheme: true,
