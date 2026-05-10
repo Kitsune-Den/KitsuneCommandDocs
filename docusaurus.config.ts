@@ -26,6 +26,34 @@ const config: Config = {
 
   clientModules: [require.resolve('./src/clientModules/matomo.ts')],
 
+  // SEO: structured data + meta tags injected into every page's <head>.
+  // The JSON-LD blob tells Google this is a SoftwareApplication (vs a
+  // generic blog/docs site), which unlocks software-style rich results
+  // — version, license, "free" badge — instead of plain text snippets.
+  headTags: [
+    {
+      tagName: 'script',
+      attributes: { type: 'application/ld+json' },
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'SoftwareApplication',
+        name: 'KitsuneCommand',
+        operatingSystem: 'Windows, Linux',
+        applicationCategory: 'DeveloperApplication',
+        description:
+          'Open-source web management panel and REST API for 7 Days to Die dedicated servers. Real-time monitoring, player management, mod uploads, scheduled backups, vote rewards, and more.',
+        url: 'https://kitsunecommand.kitsuneden.net/docs/',
+        license: 'https://github.com/Kitsune-Den/KitsuneCommand/blob/main/LICENSE',
+        offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+        author: {
+          '@type': 'Organization',
+          name: 'Kitsune-Den',
+          url: 'https://kitsuneden.net',
+        },
+      }),
+    },
+  ],
+
   presets: [
     [
       'classic',
@@ -57,6 +85,25 @@ const config: Config = {
 
   themeConfig: {
     image: 'img/hero-logo.png',
+    // Default meta tags emitted into every page's <head>. Per-page frontmatter
+    // (description, keywords, image) overrides these — so use this for the
+    // sitewide fallback and write tighter descriptions per-page where it
+    // matters for search ranking.
+    metadata: [
+      {
+        name: 'description',
+        content:
+          'Open-source web management panel and REST API for 7 Days to Die dedicated servers. Real-time monitoring, player management, mod uploads, scheduled backups, vote rewards, and more.',
+      },
+      {
+        name: 'keywords',
+        content:
+          '7 days to die, 7d2d, dedicated server, server management, server panel, web admin, mod manager, vote rewards, blood moon, KitsuneCommand',
+      },
+      { property: 'og:type', content: 'website' },
+      { property: 'og:site_name', content: 'KitsuneCommand' },
+      { name: 'twitter:card', content: 'summary_large_image' },
+    ],
     colorMode: {
       defaultMode: 'dark',
       respectPrefersColorScheme: true,

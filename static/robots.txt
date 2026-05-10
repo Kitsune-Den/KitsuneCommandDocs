@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kitsunecommand.kitsuneden.net/docs/sitemap.xml
