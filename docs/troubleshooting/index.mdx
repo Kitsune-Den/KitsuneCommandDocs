@@ -104,6 +104,34 @@ If it says `ARM` or `i386`, you copied the wrong NuGet runtime — pull from `ru
 
 ---
 
+## `Failed to start web server on http://*:8888` / "Only one usage of each socket address"
+
+The full log line ends in `Only one usage of each socket address (protocol/network address/port) is normally permitted` on Windows, or `Address already in use` on Linux. The panel never comes up. If the game's own port is taken too, the server stops with `Error starting dedicated server: CreateSocketOrThreadFailure`.
+
+**Cause.** Something else on the host already holds one of KC's ports (8888 API, 8889 WebSocket, 8890 panel) or the game's (26900+). Usually that's a second 7D2D server running KitsuneCommand, or a leftover server process.
+
+**Fix.** Find what holds the ports:
+
+```bash
+# Windows (PowerShell)
+Get-NetTCPConnection -State Listen -LocalPort 8888,8889,8890,26900 | Select-Object LocalPort, OwningProcess, @{n='Process';e={(Get-Process -Id $_.OwningProcess).ProcessName}}
+
+# Linux
+sudo ss -ltnup | grep -E ':(8888|8889|8890|26900) '
+```
+
+Stop it, or give this server its own ports: `ServerPort` in `serverconfig.xml` for the game, and `WebUrl` / `WebPanelPort` / `WebSocketPort` in `appsettings.json` for KC (see [Changing ports](../configuration/appsettings.mdx#changing-ports)). Restart after either change.
+
+:::caution[Nothing shows up, but the port is still taken]
+On Windows, a server running inside **WSL with mirrored networking** (or in Docker) holds the port on the Windows side too, but Windows' own tools don't list it. Check inside WSL instead: `wsl -e ss -ltnup`.
+:::
+
+:::note[KitsuneCommand 2.10.1 and earlier]
+These builds always listen on 8890 and always forward to 8888, whatever `appsettings.json` says. On them, the only fix is to free those ports.
+:::
+
+---
+
 ## Favicon / login logo missing after a frontend deploy
 
 **Cause.** `wwwroot/` on prod gets fully replaced on each frontend deploy. If the deploy command only copied `assets/` (the hashed JS/CSS), top-level files like `favicon.svg`, `kitsune-command-logo-transparent.png`, and `index.html`'s `<link>` references silently disappear.
