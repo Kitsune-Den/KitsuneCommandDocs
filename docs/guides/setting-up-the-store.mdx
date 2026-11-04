@@ -1,0 +1,130 @@
+---
+sidebar_position: 1
+---
+
+# Setting Up the Store
+
+This walks through building an in-game shop from nothing: players earn points, you stock the store, and they spend points in chat with `/shop` and `/buy`.
+
+## How the pieces fit
+
+The store is built from three kinds of thing, all on the **Store** page in **Manage Mode**:
+
+| Piece | What it is | Example |
+|-------|------------|---------|
+| **Item definition** | One game item, with a count and quality | `drugFirstAidKit` ×5 |
+| **Command definition** | One server console command | `say "{playerName} bought a Starter Kit!"` |
+| **Store item** | What players actually buy: a name, a price, and any mix of item and command definitions | "Starter Kit", 250 pts |
+
+You make the definitions once and reuse them. A single first-aid-kit definition can go into a "Starter Kit" and a "Medic Bundle" without making it twice.
+
+## 1. Let players earn points
+
+A store is no use if nobody has points. Open **Settings → Points Economy**. The defaults are:
+
+| Source | Default |
+|--------|---------|
+| Zombie kill | 5 pts |
+| Player kill (PvP) | 10 pts |
+| Daily sign-in (`/signin` in chat) | 100 pts |
+| Playtime | 20 pts per hour, paid out every 10 minutes |
+
+Change any of them and click **Save Settings**. You can also hand out points yourself from the [Points](../web-panel/economy/points.mdx) page, or with [CD keys](../web-panel/economy/cd-keys.mdx).
+
+Then check **Settings → Chat Commands**. **Enable Chat Commands**, **Points Commands** (`/points`, `/signin`) and **Store Commands** (`/shop`, `/buy`) all need to be on. They are on by default.
+
+## 2. Add item definitions
+
+Go to **Store**, switch to **Manage Mode**, and click **Add** next to **Item Definitions**.
+
+- **Item Name.** The game's internal item name, like `gunPistol` or `drugFirstAidKit`, not the name players see. Start typing and pick from the list; it searches the [Item Database](../web-panel/content/item-database.mdx) and shows icons.
+- **Count.** How many the player gets.
+- **Quality.** 1 to 6. Only matters for items that have a quality tier (weapons, tools, armor).
+- **Durability.** Leave it at 100 unless you want to hand out worn gear.
+- **Description.** Optional, but fill it in if you make two definitions of the same item (say, 1 first-aid kit and 5 first-aid kits). The picker in step 4 lists definitions by item name, so a description is how you tell them apart in the table.
+
+:::tip
+Pick the name from the list instead of typing it. If an item name doesn't exist on your server (a typo, or an item from a mod you've since removed), the purchase is refused and the player isn't charged, but they also don't get anything.
+:::
+
+## 3. Add command definitions (optional)
+
+Skip this if your store only sells items.
+
+Click **Add** next to **Command Definitions** and enter a server console command. These placeholders are filled in with the buyer's details when the command runs:
+
+| Placeholder | Becomes |
+|-------------|---------|
+| `{entityId}` | The player's entity ID in the current game |
+| `{playerId}` | The player's platform ID |
+| `{playerName}` | The player's display name |
+
+For example, `say "{playerName} just bought a Starter Kit!"` announces the purchase in chat. Commands from other mods work too, as long as they're console commands.
+
+:::warning
+Commands run with full server-console power. Anyone who can edit the store can run any console command through it, so only give store access to people you'd trust with the console.
+:::
+
+For handing out items, use item definitions rather than a `give` command. Item definitions are checked before the player is charged; a console command that fails still costs the player their points.
+
+## 4. Create a store item
+
+Click **Add Item** next to **Store Items**.
+
+- **Name.** This is what players type after `/buy`, so keep it short and easy to spell. Spaces are fine (`/buy Starter Kit`) and capitals don't matter.
+- **Price (points).**
+- **Description.** Shown in the panel.
+- **Linked Items.** Pick one or more item definitions from step 2.
+- **Linked Commands.** Pick any command definitions from step 3.
+
+Click **Create**. That's the store stocked.
+
+## 5. Test it
+
+With a player online (you, ideally), there are two ways to try a purchase:
+
+- **From the panel.** Switch to **Browse Mode**, click **Buy for Player** on the store item, pick the player, and confirm. The player's points are spent exactly as if they'd bought it themselves, and the panel shows what was delivered.
+- **In game.** Type `/shop` in chat to see the list, then `/buy Starter Kit`.
+
+Either way, the purchase shows up on the [Purchase History](../web-panel/economy/purchase-history.mdx) page.
+
+## What players see
+
+| Chat command | What it does |
+|--------------|--------------|
+| `/points` | Shows their balance |
+| `/signin` | Claims the daily sign-in bonus |
+| `/shop` | Lists store items and prices |
+| `/buy <name>` | Buys a store item |
+| `/help` | Lists every command that's turned on |
+
+When a purchase goes through, the items are **dropped on the ground at the player's feet**, not put in their backpack, and the chat reply tells them so. If they're standing somewhere awkward (on a roof edge, in water), they may want to move first.
+
+`/shop` lists the first 20 store items in alphabetical order. If you sell more than that, the rest can still be bought with `/buy`, but players won't see them in the list.
+
+## Store settings
+
+**Settings → Store** has a purchase cooldown, a daily purchase limit, and a global price multiplier. They apply to `/buy` and to **Buy for Player** in the panel, which spends the player's points too.
+
+- **Price Multiplier** scales every item's price, rounded to the nearest point. `/shop` and the buy dialog show the multiplied price. The goods list in the panel still shows the base price you set.
+- **Purchase Cooldown** is how long a player waits between purchases, in seconds. `0` turns it off.
+- **Max Daily Purchases** caps how many things a player can buy per day. `0` means no limit. The day resets at 00:00 UTC, the same as `/signin`.
+
+The cooldown and the cap are counted per player from the purchase history, so restarting the server doesn't reset them. A refused purchase tells the player how long to wait, and nothing is dropped or charged.
+
+:::caution
+In v2.13.0 and earlier these settings are saved but not applied to purchases. On those versions, set prices directly on each store item.
+:::
+
+## Troubleshooting
+
+| Player sees | Cause |
+|-------------|-------|
+| "Store commands are disabled." | **Store Commands** is off in **Settings → Chat Commands**. |
+| "Item '…' not found." | What they typed after `/buy` doesn't match a store item name. Check spelling; spaces count. |
+| "Not enough points." | Exactly that. The reply shows the price and their balance. |
+| "Purchase cooldown: …" or "Daily purchase limit reached …" | A [store setting](#store-settings) is holding them back. The message says how long until they can buy again. |
+| "…can't be delivered right now (the shop entry is misconfigured)." | One of the store item's linked item definitions uses an item name the server doesn't have. Check the server log for which one, then fix the definition. The player wasn't charged. |
+| "…couldn't be delivered: … You were not charged." | The game couldn't drop the items, usually because the player disconnected mid-purchase. They can try again. |
+
+If **Buy for Player** in the panel says the player isn't online, they need to be connected; items can't be delivered to an offline player.
