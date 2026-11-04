@@ -4,11 +4,13 @@ sidebar_position: 2
 
 # Store
 
-The in-game shop. Runs in two modes: **Browse** (what a player sees) and **Manage** (what an admin configures).
+The in-game shop. Runs in two modes: **Browse** (buy something on a player's behalf) and **Manage** (stock the store). Players buy in game with `/shop` and `/buy`.
+
+New to the store? [Setting Up the Store](../../guides/setting-up-the-store.mdx) walks through it start to finish.
 
 ## Browse mode
 
-A card grid of purchasable items. Clicking **Buy** opens a dialog listing the items and commands included in that store entry plus the price in points.
+A card grid of store items. **Buy for Player** opens a dialog listing the items and commands in that entry and its price, and asks which online player it's for. The player's points are spent as if they'd bought it themselves.
 
 ## Manage mode
 
@@ -26,21 +28,24 @@ Three tables:
 
 | Column | Notes |
 |--------|-------|
-| Name | |
-| Quality | |
-| Max Stack | |
+| Item Name | The game's internal item name |
+| Count | |
+| Quality | 1 to 6 |
+| Durability | |
+| Description | |
 
 ### Command definitions (reusable command packages)
 
 | Column | Notes |
 |--------|-------|
-| Command Name | |
+| Command | Console command; `{entityId}`, `{playerId}` and `{playerName}` are filled in at purchase |
+| Main Thread | |
 | Description | |
 
 ## Actions
 
 - **Create / Edit / Delete** any row in the three tables above.
-- **Buy** (browse mode). Consumes the player's points and triggers delivery of the bundled items and commands.
+- **Buy for Player** (browse mode). Spends the player's points, drops the items at their feet, and runs the commands. The player must be online.
 
 ## Notes
 
