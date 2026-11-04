@@ -28,3 +28,15 @@ jobs:
           local_path: ./build/*
           remote_path: ${{ secrets.SFTP_REMOTE_PATH }}
           sftp_only: true
+
+      # sftp's * glob above skips dotfiles, so .htaccess (the custom 404
+      # page) goes up on its own.
+      - name: Deploy .htaccess via SFTP
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        with:
+          server: ${{ secrets.SFTP_HOST }}
+          username: ${{ secrets.SFTP_USER }}
+          password: ${{ secrets.SFTP_PASSWORD }}
+          local_path: ./build/.htaccess
+          remote_path: ${{ secrets.SFTP_REMOTE_PATH }}
+          sftp_only: true
