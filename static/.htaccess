@@ -1,0 +1,5 @@
+# Serve the site's own 404 page for missing URLs under /docs/ instead of
+# Apache's bare one. The path includes baseUrl, so keep it in step with
+# docusaurus.config.ts. Deployed by its own step in deploy.yml, because the
+# main upload's ./build/* glob skips dotfiles.
+ErrorDocument 404 /docs/404.html
